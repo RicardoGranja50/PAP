@@ -16,17 +16,17 @@
 		</div>
 	@else
 		<ul>
-			@foreach($alunos as $aluno)
-				@if(empty($alunos))
-					<div class="alert alert-danger" role="alert">
-			 			O resultado da sua pesquisa não foi encontrado.
-					</div>
-				@else
-					<li>
-						<a href="{{route('alunos.showAlunos', ['id'=>$aluno->id_aluno])}}"><h6>{{$aluno->nome}}</h6></a>
-					</li>
-				@endif
-			@endforeach
+			@if(count($alunos)<=0)
+				<div class="alert alert-danger" role="alert">
+			 		O resultado da sua pesquisa não foi encontrado.
+				</div>
+			@else
+				@foreach($alunos as $aluno)
+				<li>
+					<a href="{{route('alunos.showAlunos', ['id'=>$aluno->id_aluno])}}"><h6>{{$aluno->nome}}</h6></a>
+				</li>
+				@endforeach
+			@endif
 		</ul>
 	@endif
 @endsection
