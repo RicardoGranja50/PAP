@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 	//Eliminar
 
 		Route::delete('/aedah/aluno/delete/{id}', 'App\Http\Controllers\AlunosController@destroy')->name('alunos.destroy');
+
 //Turmas
 	
 	//Index
@@ -42,3 +43,7 @@ use Illuminate\Support\Facades\Route;
 		Route::get('/aedah/turmas/create', 'App\Http\Controllers\TurmasController@create')->name('turmas.create');
 
 		Route::post('/aedah/turmas/store', 'App\Http\Controllers\TurmasController@store')->name('turmas.store');
+
+	//Eliminar
+
+		Route::delete('/aedah/turmas/delete/{id}', 'App\Http\Controllers\TurmasController@destroy')->name('turmas.destroy');

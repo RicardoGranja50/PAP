@@ -15,8 +15,9 @@ class Turma extends Model
 
     protected $fillable=[
 
-        'nome_completo',
         'nome',
+        'ano',
+        'curso_abreviacao'
     ];
 
     public function alunos(){

@@ -45,7 +45,7 @@
 	  					@foreach($decimos as $decimo)
 	  						<tr>
 	  							<th scope="row">
-									<a href="{{route('alunos.show', ['id'=>$decimo->id_turma])}}"><h5>{{$decimo->nome}}- {{$decimo->nome_completo}}</h5></a>
+									<a href="{{route('alunos.show', ['id'=>$decimo->id_turma])}}"><h5>{{$decimo->curso_abreviacao}}-{{$decimo->nome}}</h5></a>
 								</th>
 							</tr>
 						@endforeach	
@@ -64,7 +64,7 @@
 	  					@foreach($decimos1 as $decimo)
 	  						<tr>
 	  							<th scope="row">
-									<a href="{{route('alunos.show', ['id'=>$decimo->id_turma])}}"><h5>{{$decimo->nome}}- {{$decimo->nome_completo}}</h5></a>
+									<a href="{{route('alunos.show', ['id'=>$decimo->id_turma])}}"><h5>{{$decimo->curso_abreviacao}}-{{$decimo->nome}}</h5></a>
 								</th>
 							</tr>
 						@endforeach	
@@ -83,7 +83,7 @@
 	  					@foreach($decimos2 as $decimo)
 	  						<tr>
 	  							<th scope="row">
-									<a href="{{route('alunos.show', ['id'=>$decimo->id_turma])}}"><h5>{{$decimo->nome}}- {{$decimo->nome_completo}}</h5></a>
+									<a href="{{route('alunos.show', ['id'=>$decimo->id_turma])}}"><h5>{{$decimo->curso_abreviacao}}-{{$decimo->nome}}</h5></a>
 								</th>
 							</tr>
 						@endforeach	
@@ -93,7 +93,6 @@
 
   			<div class="container-fluid">
 				<a href="{{route('turmas.create')}}" class="btn btn-primary" style="background-color: #80bfff" >Adicionar turma</a>
-				<a href="" class="btn btn-primary" style="background-color: #80bfff">Eliminar turma</a>
 			</div>
 			
   		</div>

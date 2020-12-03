@@ -30,7 +30,7 @@
 			<tbody>
 				@foreach($alunos as $aluno)	
 					<tr>
-					    <th scope="row"><a href="{{route('alunos.show', ['id'=>$aluno->turma->id_turma])}}"><h6>{{$aluno->turma->nome}}</h6></a> </th>
+					    <th scope="row"><a href="{{route('alunos.show', ['id'=>$aluno->turma->id_turma])}}"><h6>{{$aluno->turma->ano}}{{$aluno->turma->curso_abreviacao}}</h6></a> </th>
 					    <td><a href="{{route('alunos.showAlunos', ['id'=>$aluno->id_aluno])}}"><h6>{{$aluno->nome}}</h6></a></td>
 					    <td>          </td>
 					</tr>

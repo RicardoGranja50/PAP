@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 03-Dez-2020 às 15:38
--- Versão do servidor: 10.1.38-MariaDB
--- versão do PHP: 7.3.2
+-- Tempo de geração: 03-Dez-2020 às 18:33
+-- Versão do servidor: 10.4.14-MariaDB
+-- versão do PHP: 7.3.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pap`
+-- Banco de dados: `pap`
 --
 
 -- --------------------------------------------------------
@@ -49,9 +48,7 @@ CREATE TABLE `alunos` (
 
 INSERT INTO `alunos` (`id_aluno`, `nome`, `morada`, `codigo_postal`, `telemovel`, `email`, `nome_enc`, `telemovel_enc`, `id_civil_aluno`, `localidade`, `nascimento`, `id_turma`) VALUES
 (1, 'Ricardo Costa Granja', 'Rua da Boavista nº:116', '5795-516', '939236400', NULL, 'Maria da Luz Salgado Costa', '966377322', '31012300 1 ZY4', '', '2003-03-03', 3),
-(2, 'André Neto', 'aaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaa', '111111111', '0', 'aaaaaaaaaaaaaa', '1111111', '111111111', 'aaaaaaaaaaaaa', '2020-11-11', 3),
-(3, 'aaaaaaaa', 'aaaaaaaa', '1111111', '111111111', 'aaaaaaaaaaaaa', 'aaaaaaaaa', '', '', '', '0000-00-00', 0),
-(4, 'aaaaaaaaaaa', 'aaaaaaaaaaaa', '11111111', NULL, NULL, 'aaaaaaaaaaaaaaa', '111111111', '1111111111', 'aaaaaaaaa', '2020-12-02', 3);
+(2, 'André Neto', 'aaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaa', '111111111', '0', 'aaaaaaaaaaaaaa', '1111111', '111111111', 'aaaaaaaaaaaaa', '2020-11-11', 3);
 
 -- --------------------------------------------------------
 
@@ -137,65 +134,67 @@ CREATE TABLE `produtos_compras` (
 CREATE TABLE `turmas` (
   `id_turma` int(11) NOT NULL,
   `nome` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nome_completo` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL
+  `ano` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `curso_abreviacao` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Extraindo dados da tabela `turmas`
 --
 
-INSERT INTO `turmas` (`id_turma`, `nome`, `nome_completo`) VALUES
-(1, '10ºH1', 'Humanidades'),
-(2, '11ºSE', 'Socio Económico'),
-(3, '12ºI1', 'Informática');
+INSERT INTO `turmas` (`id_turma`, `nome`, `ano`, `curso_abreviacao`) VALUES
+(1, 'Humanidades', '10º', 'H'),
+(2, 'Socio Economico', '11º', 'SE'),
+(3, 'Informática', '12º', 'I1'),
+(4, '11º', '', '');
 
 --
--- Indexes for dumped tables
+-- Índices para tabelas despejadas
 --
 
 --
--- Indexes for table `alunos`
+-- Índices para tabela `alunos`
 --
 ALTER TABLE `alunos`
   ADD PRIMARY KEY (`id_aluno`),
   ADD KEY `id_turma` (`id_turma`);
 
 --
--- Indexes for table `carregamentos`
+-- Índices para tabela `carregamentos`
 --
 ALTER TABLE `carregamentos`
   ADD PRIMARY KEY (`id_carregamento`),
   ADD KEY `id_movimento` (`id_movimento`);
 
 --
--- Indexes for table `compras`
+-- Índices para tabela `compras`
 --
 ALTER TABLE `compras`
   ADD PRIMARY KEY (`id_compra`),
   ADD KEY `id_movimento` (`id_movimento`);
 
 --
--- Indexes for table `entrada_saida`
+-- Índices para tabela `entrada_saida`
 --
 ALTER TABLE `entrada_saida`
   ADD PRIMARY KEY (`id_entrada_saida`),
   ADD KEY `id_movimento` (`id_movimento`);
 
 --
--- Indexes for table `movimentos`
+-- Índices para tabela `movimentos`
 --
 ALTER TABLE `movimentos`
   ADD PRIMARY KEY (`id_movimento`),
   ADD KEY `id_aluno` (`id_aluno`);
 
 --
--- Indexes for table `produtos`
+-- Índices para tabela `produtos`
 --
 ALTER TABLE `produtos`
   ADD PRIMARY KEY (`id_produto`);
 
 --
--- Indexes for table `produtos_compras`
+-- Índices para tabela `produtos_compras`
 --
 ALTER TABLE `produtos_compras`
   ADD PRIMARY KEY (`id_prod_comp`),
@@ -203,62 +202,62 @@ ALTER TABLE `produtos_compras`
   ADD KEY `id_produto` (`id_produto`);
 
 --
--- Indexes for table `turmas`
+-- Índices para tabela `turmas`
 --
 ALTER TABLE `turmas`
   ADD PRIMARY KEY (`id_turma`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT for table `alunos`
+-- AUTO_INCREMENT de tabela `alunos`
 --
 ALTER TABLE `alunos`
   MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `carregamentos`
+-- AUTO_INCREMENT de tabela `carregamentos`
 --
 ALTER TABLE `carregamentos`
   MODIFY `id_carregamento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `compras`
+-- AUTO_INCREMENT de tabela `compras`
 --
 ALTER TABLE `compras`
   MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `entrada_saida`
+-- AUTO_INCREMENT de tabela `entrada_saida`
 --
 ALTER TABLE `entrada_saida`
   MODIFY `id_entrada_saida` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `movimentos`
+-- AUTO_INCREMENT de tabela `movimentos`
 --
 ALTER TABLE `movimentos`
   MODIFY `id_movimento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `produtos`
+-- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
   MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `produtos_compras`
+-- AUTO_INCREMENT de tabela `produtos_compras`
 --
 ALTER TABLE `produtos_compras`
   MODIFY `id_prod_comp` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `turmas`
+-- AUTO_INCREMENT de tabela `turmas`
 --
 ALTER TABLE `turmas`
-  MODIFY `id_turma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_turma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

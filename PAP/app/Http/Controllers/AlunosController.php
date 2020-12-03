@@ -16,9 +16,9 @@ class AlunosController extends Controller
 		$dez=10;
 		$onze=11;
 		$doze=12;
-		$decimo=Turma::where('nome','Like','%'.$dez.'%')->get();
-		$decimo1=Turma::where('nome','Like','%'.$onze.'%')->get();
-		$decimo2=Turma::where('nome','Like','%'.$doze.'%')->get();
+		$decimo=Turma::where('ano','Like','%'.$dez.'%')->get();
+		$decimo1=Turma::where('ano','Like','%'.$onze.'%')->get();
+		$decimo2=Turma::where('ano','Like','%'.$doze.'%')->get();
 		return view('alunos.index',[
 			'decimos'=>$decimo,
 			'decimos1'=>$decimo1,
@@ -29,11 +29,13 @@ class AlunosController extends Controller
 	public function show(Request $req){
 
 		$idTurma=$req->id;
+		$turma=Turma::where('id_turma',$idTurma )->first();
 		$alunos=Aluno::where('id_turma',$idTurma)->get()->sortby('nome');
 
 		return view('alunos.show', [
 
-			'alunos'=>$alunos
+			'alunos'=>$alunos,
+			'turma'=>$turma,
 		]);
 	}
 
