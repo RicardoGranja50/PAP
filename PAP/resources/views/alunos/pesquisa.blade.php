@@ -24,7 +24,7 @@
 				<tr>
 				    <th scope="col">Turma</th>
 				    <th scope="col">Nome Aluno</th>
-				    <th scope="col">Cartao do Aluno</th>
+				    <th scope="col">Cartão do Aluno</th>
 				</tr>
 			</thead>
 			<tbody>
