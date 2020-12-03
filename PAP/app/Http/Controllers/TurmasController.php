@@ -37,7 +37,7 @@ class TurmasController extends Controller
         
         if(is_null($turma)){
 
-            return redirect()->route('alunos.index')->with('msg','O turma nao existe!!!');
+            return redirect()->route('alunos.index')->with('msg','A turma nao existe!!!');
         }
         else{
 

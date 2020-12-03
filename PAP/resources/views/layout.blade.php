@@ -11,6 +11,11 @@
     <script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/all.min.js')}}"></script>
+    @if(session()->has('msg')) 
+      <div class="alert alert-danger" role="alert">
+      {{session('msg')}}  
+      </div>   
+    @endif
 </head>
 <body>
 	@yield('pesquisaAluno')
@@ -49,5 +54,6 @@
   		</nav>
   </div>
 	@yield('conteudo')
+
 </body>
 </html>
