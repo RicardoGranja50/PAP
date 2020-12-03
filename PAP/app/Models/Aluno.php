@@ -12,14 +12,15 @@ class Aluno extends Model
     protected $primaryKey="id_aluno";
     protected $table="alunos";
     protected $dates=['nascimento'];
+    public $timestamps = false;
 
     public function movimentos(){
 
-    	return $this->hasMany('App\Http\Controllers\MovimentosController', 'id_aluno');
+    	return $this->hasMany('App\Models\Movimento', 'id_aluno');
     }
 
     public function turma(){
 
-    	return $this->belongsTo('App\Http\Controllers\TurmasController','id_turma');
+    	return $this->belongsTo('App\Models\Turma','id_turma');
     }
 }

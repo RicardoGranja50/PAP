@@ -57,6 +57,21 @@ class AlunosController extends Controller
 		 ]);
 	}
 
+	public function destroy(Request $r){
+
+		$aluno=Aluno::where('id_aluno',$r->id)->first();
+		
+		if(is_null($aluno)){
+
+			return redirect()->route('alunos.index')->with('msg','O aluno nao existe!!!');
+		}
+		else{
+
+			$aluno->delete();
+			return redirect()->route('alunos.index');
+		}
+	}
+
     public function create(){
 
     	return view('alunos.create');

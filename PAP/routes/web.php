@@ -28,7 +28,9 @@ use Illuminate\Support\Facades\Route;
 	//Formulario
 
 		Route::post('/aedah/turmas/alunos/info/pesquisa', 'App\Http\Controllers\AlunosController@pesquisa')->name('alunos.pesquisa');
+	//Eliminar
 
+		Route::delete('/aedah/aluno/delete/{id}', 'App\Http\Controllers\AlunosController@destroy')->name('alunos.destroy');
 //Turmas
 	
 	//Index

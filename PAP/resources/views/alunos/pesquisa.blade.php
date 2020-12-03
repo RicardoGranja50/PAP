@@ -7,7 +7,7 @@
 @section('conteudo')
 	<br>
 	<h3 style="text-align: center;">Resultado da pesquisa : {{$nomeAluno}}</h3><br>
-	@if(empty($nomeAluno))
+	@if(empty($nomeAluno) && $nomeAluno <=0)
 		<div class="container-fluid">
 			<div class="alert alert-danger" role="alert">
   				Digite um nome Valido. <br>
@@ -30,7 +30,7 @@
 			<tbody>
 				@foreach($alunos as $aluno)	
 					<tr>
-					    <th scope="row"><a href="{{route('alunos.index')}}"><h6>{{$aluno->turma->nome}}</h6></a> </th>
+					    <th scope="row"><a href="{{route('alunos.show', ['id'=>$aluno->turma->id_turma])}}"><h6>{{$aluno->turma->nome}}</h6></a> </th>
 					    <td><a href="{{route('alunos.showAlunos', ['id'=>$aluno->id_aluno])}}"><h6>{{$aluno->nome}}</h6></a></td>
 					    <td>          </td>
 					</tr>

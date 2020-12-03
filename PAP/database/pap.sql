@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01-Dez-2020 às 12:01
--- Versão do servidor: 10.4.14-MariaDB
--- versão do PHP: 7.3.23
+-- Generation Time: 03-Dez-2020 às 15:38
+-- Versão do servidor: 10.1.38-MariaDB
+-- versão do PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `pap`
+-- Database: `pap`
 --
 
 -- --------------------------------------------------------
@@ -48,7 +49,9 @@ CREATE TABLE `alunos` (
 
 INSERT INTO `alunos` (`id_aluno`, `nome`, `morada`, `codigo_postal`, `telemovel`, `email`, `nome_enc`, `telemovel_enc`, `id_civil_aluno`, `localidade`, `nascimento`, `id_turma`) VALUES
 (1, 'Ricardo Costa Granja', 'Rua da Boavista nº:116', '5795-516', '939236400', NULL, 'Maria da Luz Salgado Costa', '966377322', '31012300 1 ZY4', '', '2003-03-03', 3),
-(2, 'André Neto', 'aaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaa', '111111111', '0', 'aaaaaaaaaaaaaa', '1111111', '111111111', 'aaaaaaaaaaaaa', '2020-11-11', 3);
+(2, 'André Neto', 'aaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaa', '111111111', '0', 'aaaaaaaaaaaaaa', '1111111', '111111111', 'aaaaaaaaaaaaa', '2020-11-11', 3),
+(3, 'aaaaaaaa', 'aaaaaaaa', '1111111', '111111111', 'aaaaaaaaaaaaa', 'aaaaaaaaa', '', '', '', '0000-00-00', 0),
+(4, 'aaaaaaaaaaa', 'aaaaaaaaaaaa', '11111111', NULL, NULL, 'aaaaaaaaaaaaaaa', '111111111', '1111111111', 'aaaaaaaaa', '2020-12-02', 3);
 
 -- --------------------------------------------------------
 
@@ -142,57 +145,57 @@ CREATE TABLE `turmas` (
 --
 
 INSERT INTO `turmas` (`id_turma`, `nome`, `nome_completo`) VALUES
-(1, '10ºH1', ''),
+(1, '10ºH1', 'Humanidades'),
 (2, '11ºSE', 'Socio Económico'),
 (3, '12ºI1', 'Informática');
 
 --
--- Índices para tabelas despejadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices para tabela `alunos`
+-- Indexes for table `alunos`
 --
 ALTER TABLE `alunos`
   ADD PRIMARY KEY (`id_aluno`),
   ADD KEY `id_turma` (`id_turma`);
 
 --
--- Índices para tabela `carregamentos`
+-- Indexes for table `carregamentos`
 --
 ALTER TABLE `carregamentos`
   ADD PRIMARY KEY (`id_carregamento`),
   ADD KEY `id_movimento` (`id_movimento`);
 
 --
--- Índices para tabela `compras`
+-- Indexes for table `compras`
 --
 ALTER TABLE `compras`
   ADD PRIMARY KEY (`id_compra`),
   ADD KEY `id_movimento` (`id_movimento`);
 
 --
--- Índices para tabela `entrada_saida`
+-- Indexes for table `entrada_saida`
 --
 ALTER TABLE `entrada_saida`
   ADD PRIMARY KEY (`id_entrada_saida`),
   ADD KEY `id_movimento` (`id_movimento`);
 
 --
--- Índices para tabela `movimentos`
+-- Indexes for table `movimentos`
 --
 ALTER TABLE `movimentos`
   ADD PRIMARY KEY (`id_movimento`),
   ADD KEY `id_aluno` (`id_aluno`);
 
 --
--- Índices para tabela `produtos`
+-- Indexes for table `produtos`
 --
 ALTER TABLE `produtos`
   ADD PRIMARY KEY (`id_produto`);
 
 --
--- Índices para tabela `produtos_compras`
+-- Indexes for table `produtos_compras`
 --
 ALTER TABLE `produtos_compras`
   ADD PRIMARY KEY (`id_prod_comp`),
@@ -200,59 +203,59 @@ ALTER TABLE `produtos_compras`
   ADD KEY `id_produto` (`id_produto`);
 
 --
--- Índices para tabela `turmas`
+-- Indexes for table `turmas`
 --
 ALTER TABLE `turmas`
   ADD PRIMARY KEY (`id_turma`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `alunos`
+-- AUTO_INCREMENT for table `alunos`
 --
 ALTER TABLE `alunos`
-  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `carregamentos`
+-- AUTO_INCREMENT for table `carregamentos`
 --
 ALTER TABLE `carregamentos`
   MODIFY `id_carregamento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `compras`
+-- AUTO_INCREMENT for table `compras`
 --
 ALTER TABLE `compras`
   MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `entrada_saida`
+-- AUTO_INCREMENT for table `entrada_saida`
 --
 ALTER TABLE `entrada_saida`
   MODIFY `id_entrada_saida` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `movimentos`
+-- AUTO_INCREMENT for table `movimentos`
 --
 ALTER TABLE `movimentos`
   MODIFY `id_movimento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `produtos`
+-- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
   MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `produtos_compras`
+-- AUTO_INCREMENT for table `produtos_compras`
 --
 ALTER TABLE `produtos_compras`
   MODIFY `id_prod_comp` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `turmas`
+-- AUTO_INCREMENT for table `turmas`
 --
 ALTER TABLE `turmas`
   MODIFY `id_turma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
