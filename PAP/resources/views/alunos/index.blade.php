@@ -5,9 +5,36 @@
 @section('pesquisaAluno')
 @endsection
 @section('conteudo')
+	<script>	
+		function decimo() {
+			document.getElementById("decimo").style.display = "initial";
+			document.getElementById("decimo1").style.display = "none";
+			document.getElementById("decimo2").style.display = "none";
+		}
+		function decimo1() {
+			document.getElementById("decimo").style.display = "none";
+			document.getElementById("decimo1").style.display = "initial";
+			document.getElementById("decimo2").style.display = "none";
+		}
+		function decimo2() {
+			document.getElementById("decimo").style.display = "none";
+			document.getElementById("decimo1").style.display = "none";
+			document.getElementById("decimo2").style.display = "initial";
+		}
+	</script>
 	<br>
 		<div class="container-fluid">
 			<div class="container-fluid">
+				<form>
+				<button type="button" style="background-color: #333333; color:white" onclick="decimo()">10º</button>
+				<button type="button" style="background-color: #333333; color:white" onclick="decimo1()">11º</button>
+				<button type="button" style="background-color: #333333; color:white" onclick="decimo2()">12º</button>
+				</form>
+			</div>
+		</div>
+	<br>
+		<div class="container-fluid" >
+			<div class="container-fluid" id="decimo">
 				<table class="table">
 	  				<thead class="thead-dark">
 	    				<tr>
@@ -26,7 +53,7 @@
 	  			</table>
   			</div>
 
-  			<div class="container-fluid">
+  			<div class="container-fluid" id="decimo1">
 	  			<table class="table">
 	  				<thead class="thead-dark">
 	    				<tr>
@@ -45,7 +72,7 @@
 	  			</table>
 	  		</div>
 
-	  		<div class="container-fluid">
+	  		<div class="container-fluid" id="decimo2">
 	  			<table class="table">
 	  				<thead class="thead-dark">
 	    				<tr>

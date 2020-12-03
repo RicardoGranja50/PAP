@@ -50,6 +50,7 @@ class AlunosController extends Controller
 
 		$nomeAluno=$req->pesquisa;
 		$alunos=Aluno::where('nome','Like','%'.$nomeAluno.'%')->with('turma')->get();
+	
 		 return view('alunos.pesquisa',[
 		 	'alunos'=>$alunos,
 		 	'nomeAluno'=>$nomeAluno,
