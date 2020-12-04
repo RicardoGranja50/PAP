@@ -11,6 +11,9 @@
 		}
 		function nao(){
 			document.getElementById("box").style.display = "none";
+			document.getElementById("box").addEventListener("click", function(event){
+  				event.preventDefault()
+			});
 		}
 	</script>
 	<br>
@@ -55,8 +58,8 @@
 					<form method="post" action="{{route('alunos.destroy', ['id'=>$aluno->id_aluno])}}">
 						@csrf
 						@method('delete')
-						<input type="submit" value="Sim">
-						<input type="submit" value="Não" onclick="preventDefault();nao()">
+						<input type="submit" value="Sim" onclick="this.form.submit()">
+						<input type="submit" value="Não" onclick="nao()">
 					</form>
 				</div>
 			</span>
