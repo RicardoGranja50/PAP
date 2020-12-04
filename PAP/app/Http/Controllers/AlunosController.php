@@ -65,12 +65,12 @@ class AlunosController extends Controller
 		
 		if(is_null($aluno)){
 
-			return redirect()->route('alunos.index')->with('msg','O aluno nao existe!!!');
+			return redirect()->route('alunos.index')->with('msg','A turma nao existe!!!');
 		}
 		else{
 
-			$aluno->delete();
-			return redirect()->route('alunos.index');
+			$aluno->delete();                                                                                                         
+			return redirect()->route('alunos.index')->with('msg','Turma eliminada!!!');
 		}
 	}
 
