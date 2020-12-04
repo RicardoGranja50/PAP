@@ -11,6 +11,9 @@
 		}
 		function nao(){
 			document.getElementById("box").style.display = "none";
+			document.getElementById("box").addEventListener("click", function(event){
+  				event.preventDefault()
+			});
 		}
 	</script>
 	<br>
@@ -45,19 +48,19 @@
 	</table>
 
 	<div class="container-fluid">
-			<a onclick="visivel()" class="btn btn-primary" style="background-color: #80bfff">Eliminar turma</a>
-			<a href="" class="btn btn-primary" style="background-color: #80bfff">Adicionar Aluno</a>
-			<br>
-			<span id="box" style="display:none">
-				<div class="alert alert-danger" role="alert">
-					Deseja eliminar a seguinte turma?
-					<form method="post" action="{{route('turmas.destroy', ['id'=>$turma->id_turma])}}">
-						@csrf
-						@method('delete')
-						<input type="submit" value="Sim">
-						<input type="submit" value="Não" onclick="preventDefault();nao()">
-					</form>
-				</div>
-			</span>
+		<a onclick="visivel()" class="btn btn-primary" style="background-color: #80bfff">Eliminar turma</a>
+		<a href="" class="btn btn-primary" style="background-color: #80bfff">Adicionar Aluno</a>
+		<br>
+		<span id="box" style="display:none">
+			<div class="alert alert-danger" role="alert">
+				Deseja eliminar a seguinte turma?
+				<form method="post" action="{{route('turmas.destroy', ['id'=>$turma->id_turma])}}">
+					@csrf
+					@method('delete')
+					<input type="submit" value="Sim" onclick="this.form.submit()">
+					<input type="submit" value="Não" onclick="nao()">
+				</form>
+			</div>
+		</span>
 	</div>
 @endsection
