@@ -1,6 +1,6 @@
 @extends('layout')
 @section('titulo')
-	Criar Turma
+	Editar Aluno
 @endsection
 @section('pesquisaAluno')
 @endsection
@@ -9,12 +9,14 @@
 	<h3 style="text-align: center;">Adicionar Turma</h3><br>
 	<br>
 	<div class="container-fluid">
-		<form action="{{route('turmas.store')}}" method="post">
+		<form action="{{route('turmas.update',['idt'=>$turma->id_turma])}}" method="post">
 			@csrf
+			@method('patch')
+
 	  		<div class="form-row">
 	    		<div class="form-group col-md-6">
 			      	<label><b>Nome Curso</b></label>
-			      	<input type="text" class="form-control" placeholder="Nome Curso" name="nome">
+			      	<input type="text" name="nome" value="{{$turma->nome}}" class="form-control">
 
 				    @if($errors->has('nome'))
 				    	<br>
@@ -26,7 +28,7 @@
 	
 			    <div class="form-group col-md-6">
 			      	<label><b>Curso Abreviação</b></label>
-			      	<input type="text" class="form-control" placeholder="Curso Abreviação" name="curso_abreviacao">
+			      	<input type="text" name="curso_abreviacao" value="{{$turma->curso_abreviacao}}" class="form-control">
 				    <br>
 				    @if($errors->has('curso_abreviacao'))
 				    	
@@ -39,7 +41,7 @@
 			    	
 			    <div class="form-group col-md-6">
 					  <label><b>Ano</b></label>
-					  <select class="custom-select my-1 mr-sm-2" name="ano">
+					  <select class="custom-select my-1 mr-sm-2" name="ano" value="{{$turma->ano}}">
 						    <option selected>Escolha...</option>
 						    <option value="10º">10º</option>
 						    <option value="11º">11º</option>
@@ -54,7 +56,7 @@
 
 			</div>
 			
-			<button type="submit" class="btn btn-primary" value="enviar" style="background-color: #80bfff">Criar</button>
+			<button type="submit" class="btn btn-primary" value="enviar" style="background-color: #80bfff">Editar</button>
 			<a href="{{route('alunos.index')}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
 		</form>
 	</div>

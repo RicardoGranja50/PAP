@@ -13,12 +13,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//PaginaPrincipal
+
+		Route::get('/aedah/principal','App\Http\Controllers\PrincipalController@principal')->name('principal.principal');
+
+//Login
+
+		Route::get('/aedah/principal/{idl}','App\Http\Controllers\PrincipalController@login')->name('principal.login');
+
+		Route::post('/aedah/principal/entrar/{idl}','App\Http\Controllers\PrincipalController@entrar')->name('principal.entrar');
 
 //Alunos
 	
-	//Formularios
+	//Criar 
 
 		Route::get('/aedah/alunos/add','App\Http\Controllers\AlunosController@create')->name('alunos.create');
+
+		Route::post('/aedah/alunos/criado','App\Http\Controllers\AlunosController@store')->name('alunos.store');
+
+	//Editar
+
+		Route::get('/aedah/alunos/edit/{id}','App\Http\Controllers\AlunosController@edit')->name('alunos.edit');
+
+		Route::patch('/aedah/alunos/editado','App\Http\Controllers\AlunosController@update')->name('alunos.update');
 
 	//Show
 		
@@ -44,6 +61,12 @@ use Illuminate\Support\Facades\Route;
 
 		Route::post('/aedah/turmas/store', 'App\Http\Controllers\TurmasController@store')->name('turmas.store');
 
+	//Editar
+
+		Route::get('/aedah/turmas/edit/{idt}','App\Http\Controllers\TurmasController@edit')->name('turmas.edit');
+
+		Route::patch('/aedah/turmas/editado','App\Http\Controllers\TurmasController@update')->name('turmas.update');
+
 	//Eliminar
 
-		Route::delete('/aedah/turmas/delete/{id}', 'App\Http\Controllers\TurmasController@destroy')->name('turmas.destroy');
+		Route::delete('/aedah/turmas/delete/{idt}', 'App\Http\Controllers\TurmasController@destroy')->name('turmas.destroy');

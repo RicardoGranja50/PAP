@@ -94,6 +94,6 @@
   			<div class="container-fluid">
 				<a href="{{route('turmas.create')}}" class="btn btn-primary" style="background-color: #80bfff" >Adicionar turma</a>
 			</div>
-			
-  		</div>
+  		</div>	
 @endsection
+

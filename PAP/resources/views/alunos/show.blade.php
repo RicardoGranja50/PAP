@@ -49,12 +49,13 @@
 
 	<div class="container-fluid">
 		<a onclick="visivel()" class="btn btn-primary" style="background-color: #80bfff">Eliminar turma</a>
-		<a href="" class="btn btn-primary" style="background-color: #80bfff">Adicionar Aluno</a>
+		<a href="{{route('turmas.edit',['idt'=>$turma->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff" >Editar turma</a>
+		<a href="{{route('alunos.create')}}" class="btn btn-primary" style="background-color: #80bfff">Adicionar Aluno</a>
 		<br>
 		<span id="box" style="display:none">
 			<div class="alert alert-danger" role="alert">
 				Deseja eliminar a seguinte turma?
-				<form method="post" action="{{route('turmas.destroy', ['id'=>$turma->id_turma])}}">
+				<form method="post" action="{{route('turmas.destroy', ['idt'=>$turma->id_turma])}}">
 					@csrf
 					@method('delete')
 					<input type="submit" value="Sim" onclick="this.form.submit()">

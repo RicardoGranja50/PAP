@@ -1,6 +1,6 @@
 @extends('layout')
 @section('titulo')
-	Craiar Aluno
+	Editar Aluno
 @endsection
 @section('pesquisaAluno')
 @endsection
@@ -8,12 +8,14 @@
 	<div class="container-fluid">
 		<br>
 		<h3 style="text-align: center;">Criar Aluno</h3><br>
-		<form action="{{route('alunos.store')}}" method="post">
+		<form action="{{route('alunos.update',['id'=>$aluno->id_aluno])}}" method="post">
 			@csrf
+			@method('patch')
+
 		  	<div class="form-row">
 			    <div class="form-group col-md-6">
 			      	<label for="inputNome4"><b>Nome Aluno</b></label>
-			      	<input type="text" class="form-control" id="inputNome4" placeholder="Nome" name="nome" value="{{old('nome')}}">
+			      	<input type="text" name="nome" value="{{$aluno->nome}}" class="form-control">
 			      	@if($errors->has('nome'))
 			      		<br>
 				    	<div class="alert alert-danger" role="alert">
@@ -23,7 +25,7 @@
 			    </div>
 			    <div class="form-group col-md-6">
 			      	<label for="inputMorada4"><b>Morada</b></label>
-			      	<input type="text" class="form-control" id="inputMorada4" placeholder="Ex: Rua dos Talhos, nº 0" name="morada" value="{{old('morada')}}">
+			      	<input type="text" name="morada" value="{{$aluno->morada}}" class="form-control">
 			      	@if($errors->has('morada'))
 			      		<br>
 				    	<div class="alert alert-danger" role="alert">
@@ -35,7 +37,7 @@
 			<div class="form-row">
 				<div class="form-group col-md-3">
 				   	<label for="inputCodigo_Postal"><b>Código Postal</b></label>
-				   	<input type="text" class="form-control" id="inputCodigo_Postal" placeholder="Ex: 0000-000" name="codigo_postal" value="{{old('codigo_postal')}}">
+				   <input type="text" name="codigo_postal" value="{{$aluno->codigo_postal}}" class="form-control">
 				   	@if($errors->has('codigo_postal'))
 			      		<br>
 				    	<div class="alert alert-danger" role="alert">
@@ -45,10 +47,10 @@
 				</div>
 				<div class="form-group col-md-3">
 				   <label><b>Turma</b></label>
-				   <select name="id_turma" class="custom-select" value="{{old('id_turma')}}">
+				   <select name="id_turma" class="custom-select">
 				   		<option>Turma...</option>
 				        @foreach($turmas as $turma)
-				            <option value="{{$turma->id_turma}}">{{$turma->ano}}{{$turma->curso_abreviacao}}</option>
+				            <option value="{{$turma->id_turma}}" @if($turma->id_turma==$aluno->id_turma)selected @endif>{{$turma->ano}}{{$turma->curso_abreviacao}}</option>
 				        @endforeach
     				</select>
 					@if($errors->has('id_turma'))
@@ -61,7 +63,7 @@
 				</div>
 				<div class="form-group col-md-6">
 				   	<label for="inputLocalidade"><b>Localidade</b></label>
-				   	<input type="text" class="form-control" id="inputLocalidade" placeholder="Ex: Vila das Aves, S.Martinho..." name="localidade" value="{{old('localidade')}}">
+				   	<input type="text" name="localidade" value="{{$aluno->localidade}}" class="form-control">
 				   	@if($errors->has('localidade'))
 			      		<br>
 				    	<div class="alert alert-danger" role="alert">
@@ -73,7 +75,7 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 				   	<label for="inputTelemovel2"><b>Telemovel Aluno</b></label>
-				   	<input type="text" class="form-control" id="inputTelemovel2" placeholder="Ex: 911230183" name="telemovel" value="{{old('telemovel')}}">
+				   	<input type="text" name="telemovel" value="{{$aluno->telemovel}}" class="form-control">
 					@if($errors->has('telemovel'))
 				      	<br>
 					    <div class="alert alert-danger" role="alert">
@@ -83,7 +85,7 @@
 				</div>
 				<div class="form-group col-md-6">
 				   	<label for="inputCartao2"><b>Id Cartão Cidadão</b></label>
-				   	<input type="text" class="form-control" id="inputCartao2" placeholder="Ex: 31012300 1 ZY4 " name="id_civil_aluno" value="{{old('id_civil_aluno')}}">
+				   	<input type="text" name="id_civil_aluno" value="{{$aluno->id_civil_aluno}}" class="form-control">
 				   	@if($errors->has('id_civil_aluno'))
 				      	<br>
 					    <div class="alert alert-danger" role="alert">
@@ -95,7 +97,7 @@
 			<div class="form-row">
 			    <div class="form-group col-md-6">
 			      	<label for="inputEmail4"><b>Email</b></label>
-			      	<input type="text" class="form-control" id="inputEmail4" placeholder="Email" name="email" value="{{old('email')}}">
+			      	<input type="text" name="email" value="{{$aluno->email}}" class="form-control">
 			      	@if($errors->has('email'))
 				      	<br>
 					    <div class="alert alert-danger" role="alert">
@@ -105,7 +107,7 @@
 			    </div>
 			    <div class="form-group col-md-6">
 			      	<label for="inputData4"><b>Data Nascimento</b></label>
-			      	<input type="date" class="form-control" id="Data4" placeholder="Data" name="nascimento" value="{{old('nascimento')}}">
+			      	<input type="date" name="nascimento" value="{{$aluno->nascimento}}" class="form-control">	
 			      	@if($errors->has('nascimento'))
 				      	<br>
 					    <div class="alert alert-danger" role="alert">
@@ -115,10 +117,10 @@
 			    </div>
 			</div>
 			<br>
-			<h5 style="text-align: center;">Informações Encarregado de Educação</h5><br>
+			<h5 style="text-align: center;"><b>Informações Encarregado de Educação</b></h5><br>
 			<div class="form-group">
 	   			<label for="inputEnc"><b>Nome Encarregado de Educação</b></label>
-	    		<input type="text" class="form-control" id="inputEnc" placeholder="Nome" name="nome_enc" value="{{old('nome_enc')}}">
+	    		<input type="text" name="nome_enc" value="{{$aluno->nome_enc}}" class="form-control">
 	    		@if($errors->has('nome_enc'))
 				    <br>
 					<div class="alert alert-danger" role="alert">
@@ -129,7 +131,7 @@
 	  		
   			<div class="form-group">
    				<label for="inputEncte"><b>Telemovel Encarregado de Educação</b></label>
-    			<input type="text" class="form-control" id="inputEncte" placeholder="Ex: 911230183" name="telemovel_enc" value="{{old('telemovel_enc')}}">
+    			<input type="text" name="telemovel_enc" value="{{$aluno->telemovel_enc}}" class="form-control">
     			@if($errors->has('telemovel_enc'))
 				    <br>
 					<div class="alert alert-danger" role="alert">
@@ -139,7 +141,8 @@
   			</div>
 
 		
-		  <button type="submit" class="btn btn-primary" style="background-color: #80bfff">Criar</button>
+		<button type="submit" class="btn btn-primary" style="background-color: #80bfff">Editar</button>
+		<a href="{{route('alunos.showAlunos',['id'=>$aluno->id_aluno])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
 		</form>
 	</div>
 @endsection

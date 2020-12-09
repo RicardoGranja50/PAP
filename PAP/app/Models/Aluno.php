@@ -14,6 +14,21 @@ class Aluno extends Model
     protected $dates=['nascimento'];
     public $timestamps = false;
 
+    protected $fillable=[
+
+        'nome',
+        'morada',
+        'codigo_postal',
+        'telemovel',
+        'email',
+        'nome_enc',
+        'telemovel_enc',
+        'id_civil_aluno',
+        'localidade',
+        'nascimento',
+        'id_turma'
+    ];
+
     public function movimentos(){
 
     	return $this->hasMany('App\Models\Movimento', 'id_aluno');

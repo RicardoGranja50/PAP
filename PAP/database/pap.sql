@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03-Dez-2020 às 18:33
+-- Tempo de geração: 09-Dez-2020 às 20:35
 -- Versão do servidor: 10.4.14-MariaDB
 -- versão do PHP: 7.3.23
 
@@ -47,8 +47,8 @@ CREATE TABLE `alunos` (
 --
 
 INSERT INTO `alunos` (`id_aluno`, `nome`, `morada`, `codigo_postal`, `telemovel`, `email`, `nome_enc`, `telemovel_enc`, `id_civil_aluno`, `localidade`, `nascimento`, `id_turma`) VALUES
-(1, 'Ricardo Costa Granja', 'Rua da Boavista nº:116', '5795-516', '939236400', NULL, 'Maria da Luz Salgado Costa', '966377322', '31012300 1 ZY4', '', '2003-03-03', 3),
-(2, 'André Neto', 'aaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaa', '111111111', '0', 'aaaaaaaaaaaaaa', '1111111', '111111111', 'aaaaaaaaaaaaa', '2020-11-11', 3);
+(1, 'Ricardo Costa Granja', 'Rua da Boavista nº:116', '5795-516', '939236400', 'ricapt555@gmail.com', 'Maria da Luz Salgado Costa', '966377322', '31012300 1 ZY4', 'S.Salvador do Campo', '2003-03-03', 3),
+(6, 'Tiago Costa', 'Rua dos talhos nº111', '0000-000', '123456789', 'ricapt555@gmail.com', 'AAAAAAA', '123456789', '31012300 1 ZY3', 'Roriz', '2020-12-30', 3);
 
 -- --------------------------------------------------------
 
@@ -88,6 +88,27 @@ CREATE TABLE `entrada_saida` (
   `data` date NOT NULL,
   `id_movimento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `login`
+--
+
+CREATE TABLE `login` (
+  `id_login` int(11) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `password` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `login`
+--
+
+INSERT INTO `login` (`id_login`, `username`, `password`) VALUES
+(1, 'admin', '123456789'),
+(2, 'bar', '123456789'),
+(3, 'papelaria', '123456789');
 
 -- --------------------------------------------------------
 
@@ -145,8 +166,7 @@ CREATE TABLE `turmas` (
 INSERT INTO `turmas` (`id_turma`, `nome`, `ano`, `curso_abreviacao`) VALUES
 (1, 'Humanidades', '10º', 'H'),
 (2, 'Socio Economico', '11º', 'SE'),
-(3, 'Informática', '12º', 'I1'),
-(4, '11º', '', '');
+(3, 'Informática', '12º', 'I1');
 
 --
 -- Índices para tabelas despejadas
@@ -179,6 +199,12 @@ ALTER TABLE `compras`
 ALTER TABLE `entrada_saida`
   ADD PRIMARY KEY (`id_entrada_saida`),
   ADD KEY `id_movimento` (`id_movimento`);
+
+--
+-- Índices para tabela `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`id_login`);
 
 --
 -- Índices para tabela `movimentos`
@@ -215,7 +241,7 @@ ALTER TABLE `turmas`
 -- AUTO_INCREMENT de tabela `alunos`
 --
 ALTER TABLE `alunos`
-  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `carregamentos`
@@ -234,6 +260,12 @@ ALTER TABLE `compras`
 --
 ALTER TABLE `entrada_saida`
   MODIFY `id_entrada_saida` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `login`
+--
+ALTER TABLE `login`
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `movimentos`
@@ -257,7 +289,7 @@ ALTER TABLE `produtos_compras`
 -- AUTO_INCREMENT de tabela `turmas`
 --
 ALTER TABLE `turmas`
-  MODIFY `id_turma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_turma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

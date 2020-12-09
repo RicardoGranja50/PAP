@@ -1,6 +1,6 @@
 @extends('layout')
 @section('titulo')
-	Alunos
+	Pesquisa Alunos
 @endsection
 @section('pesquisaAluno')
 @endsection

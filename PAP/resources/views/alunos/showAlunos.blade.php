@@ -1,6 +1,6 @@
 @extends('layout')
 @section('titulo')
-	Aluno
+	Informação Aluno
 @endsection
 @section('pesquisaAluno')
 @endsection
@@ -24,10 +24,13 @@
 			<h6> <b>Morada :</b> {{$aluno->morada}}</h6> 
 		</div>
 		<div class="alert alert-secondary" role="alert">
+			<h6> <b>Turma :</b> {{$aluno->turma->ano}}{{$aluno->turma->curso_abreviacao}}</h6> 
+		</div>
+		<div class="alert alert-secondary" role="alert">
 			<h6> <b>Código Postal :</b> {{$aluno->codigo_postal}}</h6> 
 		</div>
 		<div class="alert alert-secondary" role="alert">
-			<h6> <b>Localidade :</b> {{$aluno->mlocalidade}}</h6> 
+			<h6> <b>Localidade :</b> {{$aluno->localidade}}</h6> 
 		</div>
 		<div class="alert alert-secondary" role="alert">
 			<h6> <b>Telemovel :</b> {{$aluno->telemovel}}</h6> 
@@ -50,7 +53,7 @@
 	</div>
 
 	<div class="container-fluid">
-			<a href="" class="btn btn-primary" style="background-color: #80bfff">Alterar</a>
+			<a href="{{route('alunos.edit', ['id'=>$aluno->id_aluno])}}" class="btn btn-primary" style="background-color: #80bfff">Alterar</a>
 			<a class="btn btn-primary" style="background-color: #80bfff" onclick="visivel()">Eliminar Aluno</a>
 			<span id="box" style="display:none">
 				<div class="alert alert-danger" role="alert">

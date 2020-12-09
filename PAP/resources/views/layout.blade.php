@@ -15,30 +15,30 @@
 <body>
 	@yield('pesquisaAluno')
   		<nav class="navbar navbar-light" style="background-color: #80bfff;">
-    			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <img src="{{asset('imagens/aedah.png')}}" width="40">
       		<span class="navbar-toggler-icon"></span>
-    			</button>
-          <div class="container-fluid">
-      			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        			<a class="navbar-brand" href="#">AEDAH</a>
-        			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          				<li class="nav-item active">
-            				<a class="nav-link" href="{{route('alunos.index')}}">Alunos <span class="sr-only">(current)</span></a>
-          				</li>
-          				<form class="form-inline my-2 my-lg-0" action="{{route('alunos.pesquisa')}}" method="post">
-                    @csrf
-          					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="pesquisa">
-          					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        				  </form>
-          				<li class="nav-item active">
-            				<a class="nav-link" href="#">Bar <span class="sr-only">(current)</span></a>
-          				</li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href="#">Carregamentos  <span class="sr-only">(current)</span></a>
-                  </li>
-          				<li class="nav-item active">
-            				<a class="nav-link" href="#">Portaria <span class="sr-only">(current)</span></a>
+    		</button>
+        <div class="container-fluid">
+      		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        		<a class="navbar-brand">AEDAH</a>
+        		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          		<li class="nav-item active">
+            		<a class="nav-link" href="{{route('alunos.index')}}">Alunos <span class="sr-only">(current)</span></a>
+          		</li>
+          		<form class="form-inline my-2 my-lg-0" action="{{route('alunos.pesquisa')}}" method="post">
+                @csrf
+          			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="pesquisa">
+          				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        				</form>
+          			<li class="nav-item active">
+            			<a class="nav-link" href="#">Bar <span class="sr-only">(current)</span></a>
+          			</li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Carregamentos  <span class="sr-only">(current)</span></a>
+                </li>
+          			<li class="nav-item active">
+            			<a class="nav-link" href="#">Portaria <span class="sr-only">(current)</span></a>
          				</li>
          				<li class="nav-item active">
             				<a class="nav-link" href="#">Adicionar Registos <span class="sr-only">(current)</span></a>
@@ -47,18 +47,20 @@
     			</div>
         </div>
   		</nav>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				@if(session()->has('msg')) 
-					<div class="alert alert-danger" role="alert">
-					{{session('msg')}}  
-					</div>   
-				@else
-					@yield('conteudo')
-				@endif
-			</div>
-		</div>
-	</div>
+      @if(session()->has('eliminada'))
+        <div class="alert alert-danger" role="alert">
+          {{session('eliminada')}}
+        </div>
+      @elseif(session()->has('criada'))
+        <div class="alert alert-success" role="alert">
+          {{session('criada')}}
+        </div>
+      @elseif(session()->has('editado'))
+        <div class="alert alert-success" role="alert">
+          {{session('editado')}}
+        </div>
+      @endif
+@yield('conteudo')
+
 </body>
 </html>
