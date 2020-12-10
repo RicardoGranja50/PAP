@@ -31,18 +31,6 @@
           			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="pesquisa">
           				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         				</form>
-          			<li class="nav-item active">
-            			<a class="nav-link" href="#">Bar <span class="sr-only">(current)</span></a>
-          			</li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Carregamentos  <span class="sr-only">(current)</span></a>
-                </li>
-          			<li class="nav-item active">
-            			<a class="nav-link" href="#">Portaria <span class="sr-only">(current)</span></a>
-         				</li>
-         				<li class="nav-item active">
-            				<a class="nav-link" href="#">Adicionar Registos <span class="sr-only">(current)</span></a>
-         				</li>
         			</ul>
     			</div>
         </div>
