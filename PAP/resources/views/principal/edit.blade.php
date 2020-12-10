@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8"/>
@@ -177,28 +176,45 @@ i {
 </style>
 
 
-  <div id="form_wrapper">
+<div id="form_wrapper">
     <div id="form_left">
       <img src="{{asset('imagens/aedah.png')}}" alt="computer icon" />
     </div>  
-    <form action="{{route('principal.entrar',['idl'=>$idl])}}" method="post">
+    <form action="{{route('principal.update')}}" method="post">
       @csrf
       <div id="form_right">
-        <h1>Login</h1>
+        <h1>Edit</h1>
         <div class="input_container">
           <i class="fas fa-user-friends"></i>
           <input
-            placeholder="Username"
+            placeholder="Old Username"
             type="nome"
             name="nome"
             class="input_field">
         </div>
         <div class="input_container">
+          <i class="fas fa-user-friends"></i>
+          <input
+            placeholder="New Username"
+            type="nome"
+            name="nomeNew"
+            class="input_field">
+        </div>
+        <div class="input_container">
           <i class="fas fa-lock"></i>
           <input
-            placeholder="Password"
+            placeholder="Old Password"
             type="password"
             name="password"
+            id="field_password"
+            class="input_field">
+        </div>
+        <div class="input_container">
+          <i class="fas fa-lock"></i>
+          <input
+            placeholder="New Password"
+            type="password"
+            name="passwordNew"
             id="field_password"
             class="input_field">
         </div>
@@ -209,10 +225,9 @@ i {
         @endif
             <input
             type="submit"
-            value="Login"
+            value="Confirm"
             id="input_submit"
             class="input_field">
-          <span>Alterar <a href="{{route('principal.edit')}}"> Username / Password ?</a></span>
       </form>
     </div>
   </div>

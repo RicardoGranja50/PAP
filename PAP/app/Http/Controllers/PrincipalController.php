@@ -40,4 +40,19 @@ class PrincipalController extends Controller
              return redirect()->route('principal.login',['idl'=>$idl])->with('msg','Login errado!');
         }
     }	
+
+    public function edit(){
+        return view('principal.edit');
+    }
+
+    public function update(Request $req){
+
+        $nomeOld=$req->nome;
+        $nomeNew=$req->nomeNew;
+
+        $password=$req->password;
+        $passwordNew=$req->passwordNew;
+
+        
+    }
 }

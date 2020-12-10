@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 
 //Login
 
+		Route::get('/aedah/principal/alterar','App\Http\Controllers\PrincipalController@edit')->name('principal.edit');
+
+		Route::post('/aedah/principal/alterado','App\Http\Controllers\PrincipalController@update')->name('principal.update');
+
 		Route::get('/aedah/principal/{idl}','App\Http\Controllers\PrincipalController@login')->name('principal.login');
 
 		Route::post('/aedah/principal/entrar/{idl}','App\Http\Controllers\PrincipalController@entrar')->name('principal.entrar');
