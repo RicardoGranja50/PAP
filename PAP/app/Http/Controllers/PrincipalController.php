@@ -27,7 +27,7 @@ class PrincipalController extends Controller
     	$idl=$req->idl;
         $nome=$req->nome;
         $password=$req->password;
-        $password1=Principal::where('password',$password)->first();
+        $password1=Principal::where('password',$password)->where('username',$nome)->first();
         if($idl==1){
             if($nome=="admin" && isset($password1)){
                return redirect()->route('alunos.index');
@@ -47,12 +47,29 @@ class PrincipalController extends Controller
 
     public function update(Request $req){
 
-        $nomeOld=$req->nome;
-        $nomeNew=$req->nomeNew;
 
-        $password=$req->password;
+        $nome=$req->nome;
+
+        $password=$req->passwordOld;
         $passwordNew=$req->passwordNew;
 
-        
+        $verifieP=Principal::where('password',$password)->first();
+        $verifieN=Principal::where('username',$nome)->first();
+
+        if(is_null($verifieP) || is_null($verifieN)){
+            return redirect()->route('principal.edit')->with('pass','Password ou Username incorreto!');
+        }
+        else{
+
+            $atualizarPass=$req->validate([
+
+                'password'=>['required','min:8','max:150']
+            ]);
+            
+
+            $verifieP->update($atualizarPass);
+
+            return redirect()->route('principal.principal')->with('pass','Password editada com sucesso !');
+        }
     }
 }

@@ -205,7 +205,7 @@ i {
         @if(session()->has('msg'))
           <div class="input_container" role="alert" style="background-color:#ffc1b5;text-align: center">
             {{session('msg')}}
-          </div>
+        </div>
         @endif
             <input
             type="submit"

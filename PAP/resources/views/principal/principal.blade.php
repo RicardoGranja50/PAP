@@ -32,7 +32,11 @@
 
 	</style>
 
-
+	@if(session()->has('pass'))
+        <div class="alert alert-success" role="alert">
+          {{session('pass')}}
+        </div>
+    @endif
 	<div class="table-responsive">
 		<table class="table">
 			<tr style="text-align: center;background-color: #80bfff;" id="header">

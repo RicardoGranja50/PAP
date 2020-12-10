@@ -183,21 +183,13 @@ i {
     <form action="{{route('principal.update')}}" method="post">
       @csrf
       <div id="form_right">
-        <h1>Edit</h1>
-        <div class="input_container">
+        <h1>Change Password</h1>
+         <div class="input_container">
           <i class="fas fa-user-friends"></i>
           <input
-            placeholder="Old Username"
+            placeholder="Username"
             type="nome"
             name="nome"
-            class="input_field">
-        </div>
-        <div class="input_container">
-          <i class="fas fa-user-friends"></i>
-          <input
-            placeholder="New Username"
-            type="nome"
-            name="nomeNew"
             class="input_field">
         </div>
         <div class="input_container">
@@ -205,7 +197,7 @@ i {
           <input
             placeholder="Old Password"
             type="password"
-            name="password"
+            name="passwordOld"
             id="field_password"
             class="input_field">
         </div>
@@ -214,13 +206,19 @@ i {
           <input
             placeholder="New Password"
             type="password"
-            name="passwordNew"
+            name="password"
             id="field_password"
             class="input_field">
         </div>
-        @if(session()->has('msg'))
+        @if(session()->has('pass'))
+        <br>
           <div class="input_container" role="alert" style="background-color:#ffc1b5;text-align: center">
-            {{session('msg')}}
+            {{session('pass')}}
+        </div>
+        @endif
+        @if($errors->has('password'))
+          <div class="input_container" role="alert" style="background-color:#ffc1b5">
+            A password tem de conter no minímo 8 caracteres.
           </div>
         @endif
             <input
