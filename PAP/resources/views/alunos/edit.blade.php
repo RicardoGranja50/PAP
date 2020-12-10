@@ -107,7 +107,7 @@
 			    </div>
 			    <div class="form-group col-md-6">
 			      	<label for="inputData4"><b>Data Nascimento</b></label>
-			      	<input type="date" name="nascimento" value="{{$aluno->nascimento}}" class="form-control">	
+			      	<input type="date" name="nascimento" value="{{$aluno->nascimento->format('Y-m-d')}}" class="form-control">	
 			      	@if($errors->has('nascimento'))
 				      	<br>
 					    <div class="alert alert-danger" role="alert">
