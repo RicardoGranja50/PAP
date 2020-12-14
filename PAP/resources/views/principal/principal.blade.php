@@ -24,20 +24,19 @@
 		}
 
 		#footer{
-			position:absolute;
+			
 		    bottom:0;
 		    width: 100%;
 		    height: 15%;
 		}
 
 	</style>
-
-	@if(session()->has('pass'))
-        <div class="alert alert-success" role="alert">
-          {{session('pass')}}
-        </div>
-    @endif
 	<div class="table-responsive">
+		@if(session()->has('pass'))
+	        <div class="alert alert-success" role="alert">
+	          {{session('pass')}}
+	        </div>
+    	@endif
 		<table class="table">
 			<tr style="text-align: center;background-color: #80bfff;" id="header">
 				<td colspan="2">

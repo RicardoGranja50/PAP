@@ -212,8 +212,15 @@ i {
             value="Login"
             id="input_submit"
             class="input_field">
-          <span>Alterar <a href="{{route('principal.edit')}}"> Username / Password ?</a></span>
       </form>
+      <form action="{{route('principal.principal')}}">
+         <input
+              type="submit"
+              value="Cancel"
+              id="input_submit"
+              class="input_field">
+      </form>
+      <span>Alterar <a href="{{route('principal.edit')}}"> Password </a></span>
     </div>
   </div>
 </body>

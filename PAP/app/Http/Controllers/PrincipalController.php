@@ -28,6 +28,7 @@ class PrincipalController extends Controller
         $nome=$req->nome;
         $password=$req->password;
         $password1=Principal::where('password',$password)->where('username',$nome)->first();
+        $password1=bcrypt($password1);
         if($idl==1){
             if($nome=="admin" && isset($password1)){
                return redirect()->route('alunos.index');
@@ -66,6 +67,7 @@ class PrincipalController extends Controller
                 'password'=>['required','min:8','max:150']
             ]);
             
+            $atualizarPass['password']=bcrypt($atualizarPass['password']);
 
             $verifieP->update($atualizarPass);
 

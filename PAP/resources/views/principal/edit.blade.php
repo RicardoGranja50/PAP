@@ -227,6 +227,13 @@ i {
             id="input_submit"
             class="input_field">
       </form>
+      <form action="{{route('principal.principal')}}">
+         <input
+              type="submit"
+              value="Cancel"
+              id="input_submit"
+              class="input_field">
+      </form>
     </div>
   </div>
 </body>
