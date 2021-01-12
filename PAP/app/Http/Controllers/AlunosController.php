@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Aluno;
 use App\Models\Turma;
+use Illuminate\Support\Facades\Storage;
 
 class AlunosController extends Controller
 {
@@ -69,6 +70,13 @@ class AlunosController extends Controller
 		}
 		else{
 
+            $idAluno=$r->id;
+            $aluno=Aluno::findOrFail($idAluno);
+            $fotoAntiga=$aluno->foto_aluno;
+
+            if(!is_null($fotoAntiga)){
+                Storage::Delete('imagens/alunos/'.$fotoAntiga);
+            }
 			$aluno->delete();  
 			return redirect()->route('alunos.index')->with('eliminada','Aluno eliminado!');
 		}
@@ -95,8 +103,17 @@ class AlunosController extends Controller
             'id_civil_aluno'=>['required','min:14','max:14'],
             'localidade'=>['required','min:4','max:250'],
             'nascimento'=>['required', 'date'],
-            'id_turma'=>['required', 'numeric']
+            'id_turma'=>['required', 'numeric'],
+            'foto_aluno'=>['nullable','image','max:2000']
         ]);
+
+        if($req->hasFile('foto_aluno')){
+            $nomeFoto=$req->file('foto_aluno')->getClientOriginalName();
+            $nomeFoto=time().'_'.$nomeFoto;
+            $guardarFoto=$req->file('foto_aluno')->storeAs('imagens/alunos',$nomeFoto);
+        
+            $novoAluno['foto_aluno']=$nomeFoto;
+        }
 
         $aluno=Aluno::create($novoAluno);
 

@@ -8,7 +8,7 @@
 	<div class="container-fluid">
 		<br>
 		<h3 style="text-align: center;">Criar Aluno</h3><br>
-		<form action="{{route('alunos.store')}}" method="post">
+		<form action="{{route('alunos.store')}}" method="post" enctype="multipart/form-data">
 			@csrf
 		  	<div class="form-row">
 			    <div class="form-group col-md-6">
@@ -114,6 +114,18 @@
 		    		@endif
 			    </div>
 			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+			      	<label for="inputData4"><b>Foto aluno</b></label>
+			      	<input type="file" id="Foto4" name="foto_aluno" value="{{old('foto_aluno')}}">
+			      	@if($errors->has('foto_aluno'))
+				      	<br>
+					    <div class="alert alert-danger" role="alert">
+	  						Introduza uma foto.
+						</div>
+		    		@endif
+			    </div>
+			</div>
 			<br>
 			<h5 style="text-align: center;">Informações Encarregado de Educação</h5><br>
 			<div class="form-group">
@@ -140,6 +152,8 @@
 
 		
 		  <button type="submit" class="btn btn-primary" style="background-color: #80bfff">Criar</button>
+		  <a href="{{route('alunos.index')}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
 		</form>
+
 	</div>
 @endsection

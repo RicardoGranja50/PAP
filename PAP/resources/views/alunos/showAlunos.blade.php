@@ -17,7 +17,14 @@
 		}
 	</script>
 	<br>
+
 	<h3 style="text-align: center;">Informações de {{$aluno->nome}}</h3><br>
+	<div class="container-fluid">
+		@if(isset($aluno->foto_aluno))
+			<img src="{{asset('imagens/alunos/'.$aluno->foto_aluno)}}">
+		@endif
+	</div>
+
 	<br>
 	<div class="container-fluid">
 		<div class="alert alert-secondary" role="alert">
@@ -55,6 +62,7 @@
 	<div class="container-fluid">
 			<a href="{{route('alunos.edit', ['id'=>$aluno->id_aluno])}}" class="btn btn-primary" style="background-color: #80bfff">Alterar</a>
 			<a class="btn btn-primary" style="background-color: #80bfff" onclick="visivel()">Eliminar Aluno</a>
+			<a href="{{route('alunos.index')}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
 			<span id="box" style="display:none">
 				<div class="alert alert-danger" role="alert">
 					Deseja eliminar o seguinte aluno?
@@ -66,6 +74,7 @@
 					</form>
 				</div>
 			</span>
+			
 	</div>
 
 @endsection

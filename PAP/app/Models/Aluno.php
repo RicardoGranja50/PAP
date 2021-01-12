@@ -26,7 +26,8 @@ class Aluno extends Model
         'id_civil_aluno',
         'localidade',
         'nascimento',
-        'id_turma'
+        'id_turma',
+        'foto_aluno'
     ];
 
     public function movimentos(){
