@@ -16,14 +16,21 @@
 			});
 		}
 	</script>
+	<style>
+		#fotos{
+			height: 100px;
+		}
+	</style>
 	<br>
 
 	<h3 style="text-align: center;">Informações de {{$aluno->nome}}</h3><br>
-	<div class="container-fluid">
-		@if(isset($aluno->foto_aluno))
-			<img src="{{asset('imagens/alunos/'.$aluno->foto_aluno)}}">
-		@endif
-	</div>
+	@if(!is_null($aluno->foto_aluno))
+		<div class="container-fluid">
+			@if(isset($aluno->foto_aluno))
+				<img src="{{asset('imagens/alunos/'.$aluno->foto_aluno)}}" id="fotos">
+			@endif
+		</div>
+	@endif
 
 	<br>
 	<div class="container-fluid">

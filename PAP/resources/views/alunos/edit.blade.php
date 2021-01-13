@@ -8,7 +8,7 @@
 	<div class="container-fluid">
 		<br>
 		<h3 style="text-align: center;">Criar Aluno</h3><br>
-		<form action="{{route('alunos.update',['id'=>$aluno->id_aluno])}}" method="post">
+		<form action="{{route('alunos.update',['id'=>$aluno->id_aluno])}}" method="post" enctype="multipart/form-data">
 			@csrf
 			@method('patch')
 
@@ -112,6 +112,18 @@
 				      	<br>
 					    <div class="alert alert-danger" role="alert">
 	  						A data nascimento do aluno é de preenchimento obrigatório.
+						</div>
+		    		@endif
+			    </div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+			      	<label for="inputData4"><b>Foto aluno</b></label>
+			      	<input type="file" id="Foto4" name="foto_aluno" value="{{$aluno->foto_aluno}}">
+			      	@if($errors->has('foto_aluno'))
+				      	<br>
+					    <div class="alert alert-danger" role="alert">
+	  						Introduza uma foto.
 						</div>
 		    		@endif
 			    </div>

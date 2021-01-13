@@ -104,7 +104,7 @@ class AlunosController extends Controller
             'localidade'=>['required','min:4','max:250'],
             'nascimento'=>['required', 'date'],
             'id_turma'=>['required', 'numeric'],
-            'foto_aluno'=>['nullable','image','max:2000']
+            'foto_aluno'=>['required','image','max:2000']
         ]);
 
         if($req->hasFile('foto_aluno')){
@@ -137,6 +137,7 @@ class AlunosController extends Controller
 
     	$idAluno=$req->id;
     	$aluno=Aluno::where('id_aluno',$idAluno)->first();
+        $imagemAntiga=$aluno->foto_aluno;
 
     	$atualizarAluno=$req->validate([
     		'nome'=>['required','min:3','max:150'],
@@ -149,8 +150,21 @@ class AlunosController extends Controller
             'id_civil_aluno'=>['required','min:14','max:14'],
             'localidade'=>['required','min:4','max:250'],
             'nascimento'=>['required', 'date'],
-            'id_turma'=>['required', 'numeric']
+            'id_turma'=>['required', 'numeric'],
+            'foto_aluno'=>['required','image','max:2000']
     	]);
+        
+        if($req->hasFile('foto_aluno')){
+
+            $nomeFoto=$req->file('foto_aluno')->getClientOriginalName();
+            $nomeFoto=time().'_'.$nomeFoto;
+            $guardarFoto=$req->file('foto_aluno')->storeAs('imagens/alunos',$nomeFoto);
+            
+            if(!is_null($imagemAntiga)){
+                Storage::Delete('imagens/alunos/'.$imagemAntiga);
+            }
+            $atualizarAluno['foto_aluno']=$nomeFoto;
+        }
 
     	$aluno->update($atualizarAluno);
 
