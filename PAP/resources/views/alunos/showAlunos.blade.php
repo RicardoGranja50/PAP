@@ -66,22 +66,22 @@
 		</div>
 	</div>
 
-	<div class="container-fluid">
-			<a href="{{route('alunos.edit', ['id'=>$aluno->id_aluno])}}" class="btn btn-primary" style="background-color: #80bfff">Alterar</a>
-			<a class="btn btn-primary" style="background-color: #80bfff" onclick="visivel()">Eliminar Aluno</a>
-			<a href="{{route('alunos.index')}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
-			<span id="box" style="display:none">
-				<div class="alert alert-danger" role="alert">
-					Deseja eliminar o seguinte aluno?
-					<form method="post" action="{{route('alunos.destroy', ['id'=>$aluno->id_aluno])}}">
-						@csrf
-						@method('delete')
-						<input type="submit" value="Sim" onclick="this.form.submit()">
-						<input type="submit" value="Não" onclick="nao()">
-					</form>
-				</div>
-			</span>
-			
-	</div>
+	@if(Gate::allows('admin'))
+		<div class="container-fluid">
+				<a class="btn btn-primary" style="background-color: #80bfff" onclick="visivel()">Eliminar Aluno</a>
+				<a href="{{route('alunos.show', ['id'=>$aluno->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
+				<span id="box" style="display:none">
+					<div class="alert alert-danger" role="alert">
+						Deseja eliminar o seguinte aluno?
+						<form method="post" action="{{route('alunos.destroy', ['id'=>$aluno->id_aluno])}}">
+							@csrf
+							@method('delete')
+							<input type="submit" value="Sim" onclick="this.form.submit()">
+							<input type="submit" value="Não" onclick="nao()">
+						</form>
+					</div>
+				</span>
+		</div>
+	@endif
 
 @endsection

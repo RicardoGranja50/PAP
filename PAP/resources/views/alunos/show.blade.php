@@ -40,28 +40,37 @@
 		      		echo $i;
 		      	?>
 		      </th>
-		      <td><a href="{{route('alunos.showAlunos', ['id'=>$aluno->id_aluno])}}"><h6>{{$aluno->nome}}</h6></a></td>
+		      <td>
+		      	<a href="{{route('alunos.showAlunos', ['id'=>$aluno->id_aluno,'idt'=>$aluno->id_turma])}}"><h6>{{$aluno->nome}}</a>
+		      	@if(Gate::allows('admin'))
+		      		<a href="{{route('alunos.edit', ['id'=>$aluno->id_aluno])}}"> <i class="fas fa-pencil-alt"></i></a>
+		      	@endif
+		      </h6></td>
 		      <td></td>
 		    </tr>
 	    @endforeach
 	  </tbody>
 	</table>
 
-	<div class="container-fluid">
-		<a onclick="visivel()" class="btn btn-primary" style="background-color: #80bfff">Eliminar turma</a>
-		<a href="{{route('turmas.edit',['idt'=>$turma->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff" >Editar turma</a>
-		<a href="{{route('alunos.create')}}" class="btn btn-primary" style="background-color: #80bfff">Adicionar Aluno</a>
-		<br>
-		<span id="box" style="display:none">
-			<div class="alert alert-danger" role="alert">
-				Deseja eliminar a seguinte turma?
-				<form method="post" action="{{route('turmas.destroy', ['idt'=>$turma->id_turma])}}">
-					@csrf
-					@method('delete')
-					<input type="submit" value="Sim" onclick="this.form.submit()">
-					<input type="submit" value="Não" onclick="nao()">
-				</form>
-			</div>
-		</span>
-	</div>
+	@if(Gate::allows('admin'))
+		<div class="container-fluid">
+			@if(is_null($vazio))
+				<a onclick="visivel()" class="btn btn-primary" style="background-color: #80bfff">Eliminar turma</a>
+			@endif
+			<a href="{{route('turmas.edit',['idt'=>$turma->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff" >Editar turma</a>
+			<a href="{{route('alunos.create')}}" class="btn btn-primary" style="background-color: #80bfff">Adicionar Aluno</a>
+			<br>
+			<span id="box" style="display:none">
+				<div class="alert alert-danger" role="alert">
+					Deseja eliminar a seguinte turma?
+					<form method="post" action="{{route('turmas.destroy', ['idt'=>$turma->id_turma])}}">
+						@csrf
+						@method('delete')
+						<input type="submit" value="Sim" onclick="this.form.submit()">
+						<input type="submit" value="Não" onclick="nao()">
+					</form>
+				</div>
+			</span>
+		</div>
+	@endif
 @endsection

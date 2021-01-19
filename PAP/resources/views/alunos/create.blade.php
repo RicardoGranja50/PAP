@@ -150,9 +150,8 @@
 		    	@endif
   			</div>
 
-		
-		  <button type="submit" class="btn btn-primary" style="background-color: #80bfff">Criar</button>
-		  <a href="{{route('alunos.index')}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
+		 	<button type="submit" class="btn btn-primary" style="background-color: #80bfff">Criar</button>
+		  	<a href="{{route('alunos.index')}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
 		</form>
 
 	</div>

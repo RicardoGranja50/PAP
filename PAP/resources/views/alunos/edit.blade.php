@@ -7,7 +7,7 @@
 @section('conteudo')
 	<div class="container-fluid">
 		<br>
-		<h3 style="text-align: center;">Criar Aluno</h3><br>
+		<h3 style="text-align: center;">Editar Aluno</h3><br>
 		<form action="{{route('alunos.update',['id'=>$aluno->id_aluno])}}" method="post" enctype="multipart/form-data">
 			@csrf
 			@method('patch')
@@ -154,7 +154,7 @@
 
 		
 		<button type="submit" class="btn btn-primary" style="background-color: #80bfff">Editar</button>
-		<a href="{{route('alunos.showAlunos',['id'=>$aluno->id_aluno])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
+		<a href="{{route('alunos.showAlunos',['id'=>$aluno->id_aluno, 'idt'=>$aluno->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
 		</form>
 	</div>
 @endsection
