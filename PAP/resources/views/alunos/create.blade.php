@@ -1,6 +1,6 @@
 @extends('layout')
 @section('titulo')
-	Craiar Aluno
+	Criar Aluno
 @endsection
 @section('pesquisaAluno')
 @endsection

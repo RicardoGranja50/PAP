@@ -46,7 +46,7 @@
 		      		<a href="{{route('alunos.edit', ['id'=>$aluno->id_aluno])}}"> <i class="fas fa-pencil-alt"></i></a>
 		      	@endif
 		      </h6></td>
-		      <td></td>
+		      <td> a{{$aluno->cartao_aluno}}</td>
 		    </tr>
 	    @endforeach
 	  </tbody>

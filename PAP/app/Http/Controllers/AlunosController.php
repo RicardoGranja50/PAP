@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Gate;
 class AlunosController extends Controller
 {
     //
+    private $x;
 
 	public function index(){
 
@@ -139,6 +140,14 @@ class AlunosController extends Controller
                     'foto_aluno'=>['required','image','max:2000']
                 ]);
 
+               
+                $cartao=Aluno::max('cartao_aluno');
+                
+
+                $cartao=$cartao+'1';
+
+                $novoAluno['cartao_aluno']=$cartao;
+
                 if($req->hasFile('foto_aluno')){
                     $nomeFoto=$req->file('foto_aluno')->getClientOriginalName();
                     $nomeFoto=time().'_'.$nomeFoto;
@@ -146,6 +155,9 @@ class AlunosController extends Controller
                 
                     $novoAluno['foto_aluno']=$nomeFoto;
                 }
+
+
+              
 
                 $aluno=Aluno::create($novoAluno);
 
