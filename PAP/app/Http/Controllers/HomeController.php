@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('alunos.index');
+         if(auth()->check()){
+            if(Gate::allows('papelaria')){
+                return redirect()->route('papelaria.carregamentos.idAluno');
+            }
+            else{
+                return redirect()->route('alunos.index');
+            }
+        }   
     }
 }

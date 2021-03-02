@@ -1,0 +1,8 @@
+var valor=calculator.display.value;
+				
+				if(valor.indexOf('.')<0){
+					calculator.display.value +='.';
+				}
+				else{
+					
+				}

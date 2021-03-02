@@ -11,9 +11,19 @@ class Movimento extends Model
 
     protected $primaryKey="id_movimento";
     protected $table="movimentos";
+    protected $dates=['created_at'];
+    public $timestamps = true;
+
+    protected $fillable=[
+
+        'carregamento',
+        'tipo_movimento',
+        'id_aluno',
+        'created_at'
+    ];
 
     public function alunos(){
 
-    	return $this->belongsTo('App\Http\Controllers\AlunosController', 'id_aluno');
+    	return $this->belongsTo('App\Models\Aluno', 'id_aluno');
     }
 }

@@ -33,5 +33,15 @@ class AuthServiceProvider extends ServiceProvider
                 return false;
             }
         });
+
+
+        Gate::define('papelaria',function($user){
+            if($user->tipo_user=='papelaria'){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
     }
 }

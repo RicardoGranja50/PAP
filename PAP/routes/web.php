@@ -83,3 +83,14 @@ use Illuminate\Support\Facades\Route;
 	Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 	Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+
+//Papelaria
+
+		Route::get('/aedah/papelaria/carregamentos/{id}','App\Http\Controllers\CarregamentosController@index')->name('papelaria.carregamentos.carregamentos')->middleware('auth');
+
+		Route::get('/aedah/papelaria/idAluno','App\Http\Controllers\CarregamentosController@idAluno')->name('papelaria.carregamentos.idAluno')->middleware('auth');
+
+		Route::get('/aedah/papelaria/idAluno/exec','App\Http\Controllers\CarregamentosController@exec')->name('papelaria.carregamentos.exec')->middleware('auth');
+
+		Route::get('/aedah/papelaria/idAluno/exec/carregamento/{id}','App\Http\Controllers\CarregamentosController@carregamentos')->name('papelaria.carregamentos.carregamentos.saldo')->middleware('auth');

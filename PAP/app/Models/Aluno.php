@@ -28,7 +28,8 @@ class Aluno extends Model
         'nascimento',
         'id_turma',
         'foto_aluno',
-        'cartao_aluno'
+        'cartao_aluno',
+        'saldo'
     ];
 
     public function movimentos(){
