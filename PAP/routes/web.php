@@ -94,3 +94,5 @@ use Illuminate\Support\Facades\Route;
 		Route::get('/aedah/papelaria/idAluno/exec','App\Http\Controllers\CarregamentosController@exec')->name('papelaria.carregamentos.exec')->middleware('auth');
 
 		Route::get('/aedah/papelaria/idAluno/exec/carregamento/{id}','App\Http\Controllers\CarregamentosController@carregamentos')->name('papelaria.carregamentos.carregamentos.saldo')->middleware('auth');
+
+		Route::get('/aedah/papelaria/papelaria/{id}','App\Http\Controllers\PapelariaController@papelaria')->name('papelaria.papelaria.papelaria')->middleware('auth');

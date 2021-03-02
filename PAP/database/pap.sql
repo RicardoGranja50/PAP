@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20-Jan-2021 às 15:28
+-- Tempo de geração: 02-Mar-2021 às 11:47
 -- Versão do servidor: 10.4.14-MariaDB
 -- versão do PHP: 7.3.23
 
@@ -40,30 +40,18 @@ CREATE TABLE `alunos` (
   `localidade` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nascimento` date NOT NULL,
   `id_turma` int(11) NOT NULL,
-  `foto_aluno` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL
+  `foto_aluno` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cartao_aluno` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `saldo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Extraindo dados da tabela `alunos`
 --
 
-INSERT INTO `alunos` (`id_aluno`, `nome`, `morada`, `codigo_postal`, `telemovel`, `email`, `nome_enc`, `telemovel_enc`, `id_civil_aluno`, `localidade`, `nascimento`, `id_turma`, `foto_aluno`) VALUES
-(1, 'Ricardo Costa Granja', 'Rua da Boavista nº:116', '5795-516', '939236400', 'ricapt555@gmail.com', 'Maria da Luz Salgado Costa', '966377322', '31012300 1 ZY4', 'S.Salvador do Campo', '2003-03-03', 3, '1610996431_1610561276_Capturar.PNG'),
-(11, 'aaaaaaa', 'aaaaaaaaaa', '1111-111', '123456789', 'ricapt555@gmail.com', 'aaaaaaa', '123456789', '31012300 1 ZY4', 'aaaaaaa', '2021-01-13', 3, '1610561429_Captura de Ecrã (1).png'),
-(12, 'aaaaaaa', 'aaaaaaaaaa', '1111-111', '123456789', 'ricapt555@gmail.com', 'aaaaaaa', '123456789', '31012300 1 ZY4', 'aaaaaaa', '2021-01-14', 2, '1611072373_1610561429_Captura de Ecrã (1).png');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `carregamentos`
---
-
-CREATE TABLE `carregamentos` (
-  `id_carregamento` int(11) NOT NULL,
-  `data` datetime NOT NULL,
-  `carregamento` int(11) NOT NULL,
-  `id_movimento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `alunos` (`id_aluno`, `nome`, `morada`, `codigo_postal`, `telemovel`, `email`, `nome_enc`, `telemovel_enc`, `id_civil_aluno`, `localidade`, `nascimento`, `id_turma`, `foto_aluno`, `cartao_aluno`, `saldo`) VALUES
+(1, 'Ricardo Costa Granja', 'Rua da Boavista nº:116', '5795-516', '939236400', 'ricapt555@gmail.com', 'Maria da Luz Salgado Costa', '966377322', '31012300 1 ZY4', 'S.Salvador do Campo', '2003-03-03', 3, '1614356487_Capturar.PNG', '11', 0),
+(11, 'aaaaaaa', 'aaaaaaaaaa', '1111-111', '123456789', 'ricapt555@gmail.com', 'aaaaaaa', '123456789', '31012300 1 ZY4', 'aaaaaaa', '2021-01-13', 3, '1610561429_Captura de Ecrã (1).png', '12', 0);
 
 -- --------------------------------------------------------
 
@@ -73,8 +61,7 @@ CREATE TABLE `carregamentos` (
 
 CREATE TABLE `compras` (
   `id_compra` int(11) NOT NULL,
-  `id_movimento` int(11) NOT NULL,
-  `data` datetime NOT NULL
+  `id_movimento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -85,10 +72,8 @@ CREATE TABLE `compras` (
 
 CREATE TABLE `entrada_saida` (
   `id_entrada_saida` int(11) NOT NULL,
-  `hora_entrada` time NOT NULL,
-  `hora_saida` time NOT NULL,
-  `data` date NOT NULL,
-  `id_movimento` int(11) NOT NULL
+  `id_movimento` int(11) NOT NULL,
+  `tipo_entrada_saida` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -106,27 +91,6 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `login`
---
-
-CREATE TABLE `login` (
-  `id_login` int(11) NOT NULL,
-  `username` varchar(150) NOT NULL,
-  `password` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `login`
---
-
-INSERT INTO `login` (`id_login`, `username`, `password`) VALUES
-(1, 'admin', '$2y$10$eDT86hHo/KLG6DWAEcJcOeZCDOi8BIZLOvPH904w.iK9C.24cBtZC'),
-(2, 'bar', '1234567890'),
-(3, 'papelaria', '123456789');
 
 -- --------------------------------------------------------
 
@@ -158,7 +122,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `movimentos` (
   `id_movimento` int(11) NOT NULL,
   `id_aluno` int(11) NOT NULL,
-  `saldo` int(11) NOT NULL
+  `tipo_movimento` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `carregamento` float DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -249,7 +216,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `tipo_user`) VALUES
-(1, 'Admin', 'ricapt555@gmail.com', NULL, '$2y$10$XcqzZdiv4KlVPf9SIl221OK4xa7WK3gatDSR122fL195lOzoUX/5C', NULL, '2021-01-19 14:54:24', '2021-01-19 14:54:24', 'admin');
+(1, 'Admin', 'ricapt555@gmail.com', NULL, '$2y$10$XcqzZdiv4KlVPf9SIl221OK4xa7WK3gatDSR122fL195lOzoUX/5C', NULL, '2021-01-19 14:54:24', '2021-01-19 14:54:24', 'admin'),
+(2, 'Ricardo', 'aaa@aaa.com', NULL, '$2y$10$jV91f/Onm8DZ89VzUOb2GeKVd8dLbbN/PFPICekBKE67IaSXCq3He', NULL, '2021-01-20 22:12:28', '2021-01-20 22:12:28', 'normal'),
+(3, 'Tiago', 'tiago@gmail.com', NULL, '$2y$10$NzT9AEa8LAlSg3TvI3WvrOXD5Uj27m44SHpA4NuJZFOUUe4HFNShC', NULL, '2021-01-22 14:17:09', '2021-01-22 14:17:09', 'normal'),
+(4, 'papelaria', 'papelaria@gmail.com', NULL, '$2y$10$P.Rw1hvQg1.dfRvmDh3Y1exzeryr0yAI7mg.XNHLl2i5Gz64s1DTi', NULL, '2021-02-25 10:02:29', '2021-02-25 10:02:29', 'papelaria');
 
 --
 -- Índices para tabelas despejadas
@@ -261,13 +231,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 ALTER TABLE `alunos`
   ADD PRIMARY KEY (`id_aluno`),
   ADD KEY `id_turma` (`id_turma`);
-
---
--- Índices para tabela `carregamentos`
---
-ALTER TABLE `carregamentos`
-  ADD PRIMARY KEY (`id_carregamento`),
-  ADD KEY `id_movimento` (`id_movimento`);
 
 --
 -- Índices para tabela `compras`
@@ -289,12 +252,6 @@ ALTER TABLE `entrada_saida`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
-
---
--- Índices para tabela `login`
---
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`id_login`);
 
 --
 -- Índices para tabela `migrations`
@@ -350,13 +307,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `alunos`
 --
 ALTER TABLE `alunos`
-  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT de tabela `carregamentos`
---
-ALTER TABLE `carregamentos`
-  MODIFY `id_carregamento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `compras`
@@ -377,12 +328,6 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `login`
---
-ALTER TABLE `login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT de tabela `migrations`
 --
 ALTER TABLE `migrations`
@@ -392,7 +337,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de tabela `movimentos`
 --
 ALTER TABLE `movimentos`
-  MODIFY `id_movimento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_movimento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
@@ -416,7 +361,7 @@ ALTER TABLE `turmas`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

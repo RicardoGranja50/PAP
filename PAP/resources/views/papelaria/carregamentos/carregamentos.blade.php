@@ -134,6 +134,15 @@
 				padding-left: 0 !important;
 				padding-right: 0 !important;
 			}
+
+			.footer {
+		        position: fixed;
+		        left: 0;
+			  	bottom: 0;
+			    width: 100%;
+			    color: black;
+			    text-align: center;
+		    }
 		</style>
 		<br>
 		<h3 align="center">Carregamento do Cartão</h3>
@@ -148,7 +157,7 @@
 							</div>
 							@foreach($movimento as $carregamento)
 								<div class="col-md-12">
-									{{$carregamento->created_at}}
+									{{$carregamento->carregamento}}
 									<br><br>
 								</div>
 							@endforeach
@@ -161,7 +170,7 @@
 							</div>
 							@foreach($movimento as $carregamento)
 								<div class="col-md-12">
-									{{$carregamento->carregamento}}
+									{{$carregamento->created_at}}
 									<br><br>
 								</div>
 							@endforeach
@@ -225,6 +234,20 @@
 				</div>
       		</div>
       	</div>
+	</div>
+	<div class="footer">
+		<div class="row">
+	  		<div class="col-md-4"> 
+	  			<a href="{{route('papelaria.carregamentos.carregamentos',['id'=>$aluno->id_aluno])}}" class="btn btn-primary" style="background-color: #80bfff">Carregamentos</a>
+	  			<a href="{{route('papelaria.papelaria.papelaria',['id'=>$aluno->id_aluno])}}" class="btn btn-primary" style="background-color: #80bfff">Papelaria</a>
+	  		</div>
+	  		<div class="col-md-4">
+	  			
+	  		</div>
+	  		<div class="col-md-4">
+	  			<a href="{{route('papelaria.carregamentos.idAluno')}}" class="btn btn-primary" style="background-color: #80bfff">Sair</a>
+	  		</div>
+	  	</div>
 	</div>
 	<script type="text/javascript">
 
