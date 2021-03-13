@@ -19,11 +19,22 @@ class Movimento extends Model
         'carregamento',
         'tipo_movimento',
         'id_aluno',
-        'created_at'
+        'created_at',
+        'carrinho'
     ];
 
     public function alunos(){
 
     	return $this->belongsTo('App\Models\Aluno', 'id_aluno');
+    }
+
+    public function produtos(){
+
+        return $this->belongsToMany(
+            'App\Models\Produto', 
+            'produtos_compras',
+            'id_movimento',
+            'id_produto'
+        )->withPivot('quantidade');
     }
 }

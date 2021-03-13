@@ -96,3 +96,19 @@ use Illuminate\Support\Facades\Route;
 		Route::get('/aedah/papelaria/idAluno/exec/carregamento/{id}','App\Http\Controllers\CarregamentosController@carregamentos')->name('papelaria.carregamentos.carregamentos.saldo')->middleware('auth');
 
 		Route::get('/aedah/papelaria/papelaria/{id}','App\Http\Controllers\PapelariaController@papelaria')->name('papelaria.papelaria.papelaria')->middleware('auth');
+
+		Route::get('/aedah/papelaria/papelaria/{id}/{tipo}/{idp}','App\Http\Controllers\PapelariaController@obterMovimentos')->name('papelaria.papelaria.compra')->middleware('auth');
+
+	//Produto
+
+		Route::get('/aedah/papelaria/produto/add','App\Http\Controllers\PapelariaController@create')->name('papelaria.papelaria.produtos')->middleware('auth');
+
+		Route::post('/aedah/papelaria/produto/store','App\Http\Controllers\PapelariaController@store')->name('papelaria.papelaria.store')->middleware('auth');
+
+			//Compra
+
+				Route::get('/aedah/papelaria/produto/compra/add/{idp}/{id}','App\Http\Controllers\PapelariaController@compra')->name('papelaria.papelaria.compra.add')->middleware('auth');
+
+				//DeleteCompra
+
+					Route::delete('/aedah/papelaria/delete/produto/compra/delete/{idp}/{id}', 'App\Http\Controllers\PapelariaController@destroy')->name('papelaria.papelaria.compra.delete')->middleware('auth');

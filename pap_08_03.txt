@@ -1,0 +1,2 @@
+pluck
+https://stackoverflow.com/questions/55620889/laravel-pluck-with-specified-keys

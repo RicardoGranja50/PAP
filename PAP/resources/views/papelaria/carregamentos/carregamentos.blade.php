@@ -8,7 +8,6 @@
 		<style>
 			  background-color: #888;
 			}
-
 			table {
 			  margin: auto;
 			  background-color: #222;
@@ -143,6 +142,9 @@
 			    color: black;
 			    text-align: center;
 		    }
+		    #fotos{
+				height: 100px;
+			}
 		</style>
 		<br>
 		<h3 align="center">Carregamento do Cartão</h3>
@@ -153,11 +155,11 @@
 					<div class="col-md-3">
 						<div class="row">
 							<div class="col-md-12 cabecalho">
-								Últimos 10 carregamentos
+								<h5>Últimos 10 carregamentos</h5>
 							</div>
 							@foreach($movimento as $carregamento)
 								<div class="col-md-12">
-									{{$carregamento->carregamento}}
+									{{$carregamento->carregamento}}€
 									<br><br>
 								</div>
 							@endforeach
@@ -166,11 +168,11 @@
 					<div class="col-md-3">
 						<div class="row">
 							<div class="col-md-12 cabecalho">
-								Data
+								<h5>Data</h5>
 							</div>
 							@foreach($movimento as $carregamento)
 								<div class="col-md-12">
-									{{$carregamento->created_at}}
+									{{$carregamento->created_at->format('d-m-Y H:i:s')}}
 									<br><br>
 								</div>
 							@endforeach
@@ -179,7 +181,7 @@
 					<div class="col-md-6">
 						<div class="row">
 							<div class="col-md-12 cabecalho ">
-								Carregamento
+								<h5>Carregamento</h5>
 							</div>
 							<div class="col-md-12">
 								<h5 align="center">{{$aluno->nome}}</h5>
@@ -187,10 +189,16 @@
 							<div class="col-md-12 ">
 								<div class="row">
 									<div class="col-md-7">
+										
 										<form name="calculator" action="{{route('papelaria.carregamentos.carregamentos.saldo',['id'=>$aluno->id_aluno])}}">
 						         			<table>
 										        <tr>
 										            <td colspan="4">
+										            	@if(session()->has('msg'))
+													        <div class="alert alert-danger" role="alert">
+													          {{session('msg')}}
+													        </div>
+								    					@endif
 										                <input type="text" name="display" id="display" disabled>
 										                <input type="hidden" name="display_final" id="display_final">
 										            </td>
@@ -223,7 +231,7 @@
 			      					</div>
 			      					<div class="col-md-5">
 			      						<br>
-			      						<img src="{{asset('imagens/alunos/'.$aluno->foto_aluno)}}">
+			      						<img id="fotos" src="{{asset('imagens/alunos/'.$aluno->foto_aluno)}}">
 			      						<br><br><br><br>
 			      						<h6>Saldo: {{$aluno->saldo}}€</h6>
 			      					</div>
@@ -248,6 +256,7 @@
 	  			<a href="{{route('papelaria.carregamentos.idAluno')}}" class="btn btn-primary" style="background-color: #80bfff">Sair</a>
 	  		</div>
 	  	</div>
+	  	<br>
 	</div>
 	<script type="text/javascript">
 
