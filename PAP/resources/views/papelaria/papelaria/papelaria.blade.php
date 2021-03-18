@@ -83,12 +83,12 @@
 									<h6>Compra:</h6>
 									<div class="scroll col-md-12">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-9">
 												@if(isset($produto_compra))
-													@if(count($produto_compra)>0) 
+													@if(count($produto_compra)>0)
 														@foreach($produto_compra as $add)
-															{{--<i class="fas fa-arrow-circle-right">--}} </i>{{$add->nome}} x{{$add->quantidade}}<br>
-															{{$add->valor}}€
+															{{--<i class="fas fa-arrow-circle-right">--}} </i>{{$add->nome}} x{{$add->pivot->quantidade}}<br>
+															{{$add->pivot->valor}}€
 															<br><br>
 														@endforeach
 													@endif
@@ -106,6 +106,15 @@
 											</div>
 										</div>
 									</div>
+									<br>
+									Valor total : {{$total_compra}}€
+									<br><br>
+									 @if(session()->has('saldo'))
+								        <div class="alert alert-danger" role="alert">
+								          {{session('saldo')}}
+								        </div>
+								    @endif
+									<a href="{{route('papelaria.papelaria.compra.comprar',['id'=>$aluno->id_aluno,'total'=>$total_compra])}}" class="btn btn-primary" style="background-color: #80bfff">Comprar</a>
 								</div>
 								
 							<div class="col-md-6">

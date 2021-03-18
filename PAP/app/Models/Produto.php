@@ -28,7 +28,7 @@ class Produto extends Model
             'produtos_compras',
             'id_produto',
             'id_movimento'
-        )->withPivot('quantidade');
+        )->withPivot('quantidade','valor');
     }
 
 }

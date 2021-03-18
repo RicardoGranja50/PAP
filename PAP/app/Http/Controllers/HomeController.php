@@ -24,9 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-         if(auth()->check()){
+        if(auth()->check()){
             if(Gate::allows('papelaria')){
                 return redirect()->route('papelaria.carregamentos.idAluno');
+            }
+            elseif(Gate::allows('bar')){
+                return redirect()->route('bar.idAluno');
             }
             else{
                 return redirect()->route('alunos.index');

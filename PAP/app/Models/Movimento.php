@@ -35,6 +35,6 @@ class Movimento extends Model
             'produtos_compras',
             'id_movimento',
             'id_produto'
-        )->withPivot('quantidade');
+        )->withPivot('quantidade','valor');
     }
 }

@@ -109,6 +109,17 @@ use Illuminate\Support\Facades\Route;
 
 				Route::get('/aedah/papelaria/produto/compra/add/{idp}/{id}','App\Http\Controllers\PapelariaController@compra')->name('papelaria.papelaria.compra.add')->middleware('auth');
 
+				Route::get('/aedah/papelaria/produto/compra/comprar/{id}/{total}','App\Http\Controllers\PapelariaController@compraFinal')->name('papelaria.papelaria.compra.comprar')->middleware('auth');
+
 				//DeleteCompra
 
-					Route::delete('/aedah/papelaria/delete/produto/compra/delete/{idp}/{id}', 'App\Http\Controllers\PapelariaController@destroy')->name('papelaria.papelaria.compra.delete')->middleware('auth');
+					Route::get('/aedah/papelaria/delete/produto/compra/{idp}/{id}', 'App\Http\Controllers\PapelariaController@destroy')->name('papelaria.papelaria.compra.delete')->middleware('auth');
+//BAR
+	
+	//idAluno
+
+		Route::get('/aedah/bar/idAluno','App\Http\Controllers\BarController@idAluno')->name('bar.idAluno')->middleware('auth');
+
+	//Bar
+
+		Route::get('/aedah/bar/{id}/{tipo}','App\Http\Controllers\BarController@bar')->name('bar.bar')->middleware('auth');

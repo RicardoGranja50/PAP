@@ -29,22 +29,68 @@ class PapelariaController extends Controller
                 //     return $query->where('id_movimento', $idMov);
                 // }]);
 
-                $produtos = Produto::whereHas('movimentos', function ($query) use ($idAluno) {
-                    return $query->where('id_aluno', $idAluno)->where('tipo_movimento', 'papelaria')->where('carrinho', 1);
-                });
-                $produtosCart = $produtos->with('movimentos')->join('produtos_compras', 'produtos.id_produto', 'produtos_compras.id_produto');
-                $produtosCart = $produtos->get();
+                $checkMov = Movimento::where('id_aluno', $idAluno)->where('tipo_movimento', 'papelaria')->where('carrinho', 1)->get();
 
+                $movimentos = Movimento::where('id_aluno', $idAluno)->where('tipo_movimento', 'papelaria')->where('carrinho', 1);
+
+                // $movimentos = $movimentos->with(['produtos'=>function ($query) {
+                //     return $query->where('produtos_compras')
+                // }]);
+                 $movimentos = $movimentos->with(['produtos']);
+                $movimentos = $movimentos->first();
+                 // dd($movimentos->produtos);
+                // foreach ($movimentos->produtos as $prod) {
+                //       echo($prod->nome)  ;
+                //       echo($prod->pivot->valor)  ;
+                //       echo '<br>';
+                // }
+               // exit();
+                //$mov = $movimentos->id_movimento;
+                //$produtos = Produto::whereHas('movimentos',function ($query) use ($mov) {
+                   // return $query->where('produtos_compras.id_movimento',$mov);
+                //});
+                //vai buscar produtos de carrinho=0 e não deve
+               
+
+                // $produtos= $produtos->get();
+                    // dd($produtos);
+                // $produtos = Produto::whereHas('movimentos', function ($query) use ($idAluno) {
+                //     return $query->where('id_aluno', $idAluno)->where('tipo_movimento', 'papelaria')->where('carrinho', 1);
+                // });
+                // dd($produtos); stor tire o mut
+
+               // $produtosCart = $produtos->with(['movimentos'=>function ($query) use ($mov) {
+               //      return $query->where('produtos_compras.id_movimento',$mov);
+               //  }]);//->join('produtos_compras', 'produtos.id_produto', 'produtos_compras.id_produto');
+               // //  dd($produtos->get());
+               //  $produtosCart = $produtos->get();
+
+               
+           
                 // $prd = \DB::table('produtos')->
                 //     join('produtos_compras', 'produtos.id_produto', 'produtos_compras.id_produto')->
                 //     join('produtos_compras', 'produtos.id_produto', 'produtos_compras.id_produto')->
                 //     get();
 
                 //dd($produtosCart);
+                $total=0;
+                if($movimentos==null){
+                    $produtosCart=[];
+                }
+                else{
+                    $produtosCart = $movimentos->produtos; 
+
+                    $total=0;
+                    foreach ($produtosCart as $v) {
+                        $total=$total+$v->pivot->valor;
+                    }
+                }
+                
                 return view('papelaria.papelaria.papelaria',[
                     'aluno'=>$aluno,
                     'produtos'=>$produto,
-                    'produto_compra' =>$produtosCart
+                    'produto_compra' =>$produtosCart,
+                    'total_compra'=>$total
                 ]);
 		    }
 		    else{
@@ -105,92 +151,148 @@ class PapelariaController extends Controller
         }
     }   
 
-    public function compra(Request $req){
-
-        $p=Produto::where('tipo_produto','papelaria')->paginate(18);
-        //$idProduto=$req->idp;
-        //$produto=Produto::where('id_produto',$idProduto)->first();
-        $idAluno=$req->id;
-        $aluno=Aluno::where('id_aluno',$idAluno)->first();
-        $movimento=Movimento::where('id_aluno',$idAluno)->where('carrinho',1)->first();
-        if(is_null($movimento)){
-            
-            $novoMovimento['tipo_movimento']="papelaria";
-            $novoMovimento['carrinho']=1;
-            $novoMovimento['id_aluno']=$idAluno;
-            $movimento=Movimento::create($novoMovimento); 
-        }
-        
-        $novoProdutoCompra['id_produto']=$idProduto;
-        $novoProdutoCompra['id_movimento']=$movimento->id_movimento;
-        $novoProdutoCompra['valor']=$produto->preco;
-        $add=ProdutoCompra::create($novoProdutoCompra);
-        $idMov = $movimento->id_movimento;
-        // $produto=ProdutoCompra::where('id_movimento',$movimento->id_movimento)->get();
-      //  \DB::enableQueryLog();
-        $produtos = Movimento::where('id_aluno', $idAluno)->where('tipo_movimento', 'papelaria')->where('carrinho', 1);
-        $produtos = $produtos->with(['produtos'=>function ($query) use ($idMov) {
-            return $query->where('id_movimento', $idMov);
-        }]);
-
-        $produtos = $produtos->get();
-  //      $dumps = \DB::getQueryLog();
-        //dd($produtos);
-        return view('papelaria.papelaria.papelaria',[
-            'aluno'=>$aluno,
-            'produto_compra'=>$produtos,
-            'produtos'=>$p
-        ]);
-    }  
 
     function obterMovimentos (Request $req) {
 
-        $movimento=Movimento::where('id_aluno',$req->id)->where('carrinho',1)->with('produtos')->first();
-        $mov = $movimento->produtos;
-        $produto=Produto::where('id_produto',$req->idp)->first();
-        $mov=$mov->pluck('id_produto')->toArray();
-
-        if (in_array($req->idp, $mov )) {
-            
-            $prodCompra=ProdutoCompra::where('id_produto',$req->idp)->first();
-            $prodCompra['quantidade']=$prodCompra['quantidade']+1;
-            $prodCompra['valor']=$produto->preco * $prodCompra['quantidade'];
-            $prodCompra->update();
-        }
-        else {
-            
-            if(is_null($movimento)){
+        if(auth()->check()){
+            if(Gate::allows('papelaria')){
+                $mov[]=-1;
+                $movimento=Movimento::where('id_aluno',$req->id)->where('carrinho',1)->with('produtos')->first();
                 
-                $novoMovimento['tipo_movimento']="papelaria";
-                $novoMovimento['carrinho']=1;
-                $novoMovimento['id_aluno']=$req->id;
-                $movimento=Movimento::create($novoMovimento); 
-            }
-        
-            $novoProdutoCompra['id_produto']=$req->idp;
-            $novoProdutoCompra['id_movimento']=$movimento->id_movimento;
-            $novoProdutoCompra['valor']=$produto->preco;
-            $add=ProdutoCompra::create($novoProdutoCompra);
-        }
-        
-        //$idMov = $movimento->id_movimento;
-        // $produto=ProdutoCompra::where('id_movimento',$movimento->id_movimento)->get();
-        // \DB::enableQueryLog();
-        //$produtos = Movimento::where('id_aluno', $req->id)->where('tipo_movimento', 'papelaria')->where('carrinho', 1);
-        //$produtos = $produtos->with(['produtos'=>function ($query) use ($idMov) {
-           // return $query->where('id_movimento', $idMov);
-        //}]);
+                $produto=Produto::where('id_produto',$req->idp)->first();
+                if(!is_null($movimento)){
+                    $mov = $movimento->produtos;
+                    $mov=$mov->pluck('id_produto')->toArray();
+                }
+                
 
-        //$produtos = $produtos->first();
-        
-        return redirect()->route('papelaria.papelaria.papelaria',[
-            'id'=>$req->id,
-        ]);
+                if (in_array($req->idp, $mov )) {
+                    
+                    $prodCompra=ProdutoCompra::where('id_produto',$req->idp)->where('id_movimento',$movimento->id_movimento)->first();
+                    $prodCompra['quantidade']=$prodCompra['quantidade']+1;
+                    $prodCompra['valor']=$produto->preco * $prodCompra['quantidade'];
+                    $prodCompra->update();
+                }
+                else {
+                    
+                    if(is_null($movimento)){
+                        
+                        $novoMovimento['tipo_movimento']="papelaria";
+                        $novoMovimento['carrinho']=1;
+                        $novoMovimento['id_aluno']=$req->id;
+                        $movimento=Movimento::create($novoMovimento); 
+                    }
+                
+                    $novoProdutoCompra['id_produto']=$req->idp;
+                    $novoProdutoCompra['quantidade']=1;
+                    $novoProdutoCompra['id_movimento']=$movimento->id_movimento;
+                    $novoProdutoCompra['valor']=$produto->preco;
+                    $add=ProdutoCompra::create($novoProdutoCompra);
+                }
+                
+                //$idMov = $movimento->id_movimento;
+                // $produto=ProdutoCompra::where('id_movimento',$movimento->id_movimento)->get();
+                // \DB::enableQueryLog();
+                //$produtos = Movimento::where('id_aluno', $req->id)->where('tipo_movimento', 'papelaria')->where('carrinho', 1);
+                //$produtos = $produtos->with(['produtos'=>function ($query) use ($idMov) {
+                   // return $query->where('id_movimento', $idMov);
+                //}]);
+
+                //$produtos = $produtos->first();
+                
+                return redirect()->route('papelaria.papelaria.papelaria',[
+                    'id'=>$req->id,
+                ]);
+            }
+            else{
+                return redirect()->route('logout');
+            } 
+        }
+        else{
+            return redirect()->route('home');
+        }
     }
+   
 
     public function destroy(Request $req){
 
-        $prodCompra=ProdutoCompra::where('id_produto',$req->idp)->first();
-        
+
+         if(auth()->check()){
+            if(Gate::allows('papelaria')){
+                $movimento=Movimento::where('id_aluno',$req->id)->where('carrinho',1)->with('produtos')->first();
+                $mov = $movimento->produtos;
+                $produto=Produto::where('id_produto',$req->idp)->first();
+                $mov=$mov->pluck('id_produto')->toArray();
+
+                if (in_array($req->idp, $mov )) {
+                    
+                    $prodCompra=ProdutoCompra::where('id_produto',$req->idp)->where('id_movimento',$movimento->id_movimento)->first();
+                    $prodCompra['quantidade']=$prodCompra['quantidade']-1;
+                    $prodCompra['valor']=$produto->preco * $prodCompra['quantidade'];
+                    $prodCompra->update();
+                    
+                    if($prodCompra['quantidade']==0){
+
+                        $prodCompra=ProdutoCompra::where('id_produto',$req->idp)->where('id_movimento',$movimento->id_movimento)->first();
+
+                        $prodCompra->delete();
+                    }
+                }
+                else {
+                    
+                    $prodCompra=ProdutoCompra::where('id_produto',$req->idp)->where('id_movimento',$movimento->id_movimento)->first();
+                    $prodCompra->delete();
+                }
+
+                return redirect()->route('papelaria.papelaria.papelaria',[
+                    'id'=>$req->id,
+                ]);
+            }
+             else{
+                return redirect()->route('logout');
+            } 
+        }
+         else{
+            return redirect()->route('home');
+        }
+
+    }
+
+    public function compraFinal(Request $req){
+
+
+         if(auth()->check()){
+            if(Gate::allows('papelaria')){
+                $movimento=Movimento::where('id_aluno',$req->id)->where('carrinho',1)->with('produtos')->first();
+                $saldo_aluno=Aluno::where('id_aluno',$req->id)->first();
+
+
+                if($req->total>$saldo_aluno->saldo){
+
+
+                    return redirect()->route('papelaria.papelaria.papelaria',[
+                        'id'=>$req->id,
+                    ])->with('saldo','Saldo insuficiente');
+                }
+                else{
+
+                    $movimento['carrinho']=0;
+                    $movimento['carregamento']=$req->total;
+                    $saldo_aluno['saldo']=$saldo_aluno['saldo'] - $req->total;
+                    $movimento->update();
+                    $saldo_aluno->update();
+
+                    return redirect()->route('papelaria.papelaria.papelaria',[
+                        'id'=>$req->id,
+                    ]);
+                }
+            }
+            else{
+                return redirect()->route('logout');
+            } 
+        }
+        else{
+            return redirect()->route('home');
+        }
     }
 }
