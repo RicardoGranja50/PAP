@@ -1,0 +1,28 @@
+<div class="col-md-12">
+							&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+							<i class="fas fa-arrow-up"></i><br><br>
+						</div>
+						
+						<div class="col-md-12">
+							<img id="categoria" src="{{asset('imagens/cat_bar/sumos.png')}}"><br>
+							<h4>&nbsp &nbsp SUMOS</h4><br>
+						</div>
+						
+						<div class="col-md-12">
+							<img id="categoria" src="{{asset('imagens/cat_bar/sandes.png')}}"><br>
+							<h4>&nbsp &nbsp Sandes</h4><br>
+						</div>
+						<div class="col-md-12">
+							<img id="categoria" src="{{asset('imagens/cat_bar/bolos.png')}}"><br>
+							<h4>&nbsp &nbsp Bolos</h4><br>
+						</div>
+						
+						<div class="col-md-12" id="escondido">
+							<img id="categoria" src="{{asset('imagens/cat_bar/bolachas.png')}}"><br>
+							<h4>&nbsp &nbsp Bolachas</h4><br>
+						</div>
+						
+						<div class="col-md-12">
+							&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+							<i class="fas fa-arrow-down"></i><br>
+						</div>

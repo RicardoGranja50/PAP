@@ -52,7 +52,19 @@ use Illuminate\Support\Facades\Route;
 	//Eliminar
 
 		Route::delete('/aedah/aluno/delete/{id}', 'App\Http\Controllers\AlunosController@destroy')->name('alunos.destroy')->middleware('auth');
+	//Cartao
 
+		//Criar
+
+			Route::get('/aedah/alunos/cartao/add/{id}','App\Http\Controllers\AlunosController@createCartao')->name('alunos.cartao.create')->middleware('auth');
+
+			Route::patch('/aedah/alunos/cartao/store/{id}','App\Http\Controllers\AlunosController@storeCartao')->name('alunos.cartao.store')->middleware('auth');
+
+		//Editar
+
+			Route::get('/aedah/alunos/cartao/edit/{id}','App\Http\Controllers\AlunosController@editCartao')->name('alunos.cartao.edit')->middleware('auth');
+
+			Route::patch('/aedah/alunos/cartao/update/{id}','App\Http\Controllers\AlunosController@updateCartao')->name('alunos.cartao.update')->middleware('auth');
 //Turmas
 	
 	//Index
@@ -99,21 +111,15 @@ use Illuminate\Support\Facades\Route;
 
 		Route::get('/aedah/papelaria/papelaria/{id}/{tipo}/{idp}','App\Http\Controllers\PapelariaController@obterMovimentos')->name('papelaria.papelaria.compra')->middleware('auth');
 
-	//Produto
+	//Compra
 
-		Route::get('/aedah/papelaria/produto/add','App\Http\Controllers\PapelariaController@create')->name('papelaria.papelaria.produtos')->middleware('auth');
+		Route::get('/aedah/papelaria/produto/compra/add/{idp}/{id}','App\Http\Controllers\PapelariaController@compra')->name('papelaria.papelaria.compra.add')->middleware('auth');
 
-		Route::post('/aedah/papelaria/produto/store','App\Http\Controllers\PapelariaController@store')->name('papelaria.papelaria.store')->middleware('auth');
+		Route::get('/aedah/papelaria/produto/compra/comprar/{id}/{total}','App\Http\Controllers\PapelariaController@compraFinal')->name('papelaria.papelaria.compra.comprar')->middleware('auth');
 
-			//Compra
+		//DeleteCompra
 
-				Route::get('/aedah/papelaria/produto/compra/add/{idp}/{id}','App\Http\Controllers\PapelariaController@compra')->name('papelaria.papelaria.compra.add')->middleware('auth');
-
-				Route::get('/aedah/papelaria/produto/compra/comprar/{id}/{total}','App\Http\Controllers\PapelariaController@compraFinal')->name('papelaria.papelaria.compra.comprar')->middleware('auth');
-
-				//DeleteCompra
-
-					Route::get('/aedah/papelaria/delete/produto/compra/{idp}/{id}', 'App\Http\Controllers\PapelariaController@destroy')->name('papelaria.papelaria.compra.delete')->middleware('auth');
+			Route::get('/aedah/papelaria/delete/produto/compra/{idp}/{id}', 'App\Http\Controllers\PapelariaController@destroy')->name('papelaria.papelaria.compra.delete')->middleware('auth');
 //BAR
 	
 	//idAluno
@@ -122,4 +128,37 @@ use Illuminate\Support\Facades\Route;
 
 	//Bar
 
-		Route::get('/aedah/bar/{id}/{tipo}','App\Http\Controllers\BarController@bar')->name('bar.bar')->middleware('auth');
+		Route::get('/aedah/bar/{id}/{cat}','App\Http\Controllers\BarController@bar')->name('bar.bar')->middleware('auth');
+
+		Route::get('/aedah/bar/idAluno/exec','App\Http\Controllers\BarController@exec')->name('bar.bar.exec')->middleware('auth');
+
+
+//Produtos
+
+	//ProdutosBar
+
+		Route::get('/aedah/bar/produtos/index','App\Http\Controllers\BarController@produtos')->name('bar.produtos')->middleware('auth');
+
+		Route::get('/aedah/bar/produtos/create','App\Http\Controllers\BarController@create')->name('bar.produtos.create')->middleware('auth');
+
+		Route::post('/aedah/bar/produtos/store','App\Http\Controllers\BarController@store')->name('bar.produtos.store')->middleware('auth');
+
+		Route::get('/aedah/bar/produtos/edit/{idp}','App\Http\Controllers\BarController@edit')->name('bar.produtos.edit')->middleware('auth');
+
+		Route::patch('/aedah/bar/produtos/update','App\Http\Controllers\BarController@update')->name('bar.produtos.update')->middleware('auth');
+
+		Route::get('/aedah/produto/delete/{idp}', 'App\Http\Controllers\BarController@destroy')->name('bar.destroy')->middleware('auth');
+
+	//ProdutosPapelaria
+
+		Route::get('/aedah/papelaria/produtos/index','App\Http\Controllers\PapelariaController@index')->name('papelaria.papelaria.produtos.index')->middleware('auth');
+
+		Route::get('/aedah/papelaria/produtos/add','App\Http\Controllers\PapelariaController@create')->name('papelaria.papelaria.produtos.create')->middleware('auth');
+
+		Route::post('/aedah/papelaria/produtos/store','App\Http\Controllers\PapelariaController@store')->name('papelaria.papelaria.produtos.store')->middleware('auth');
+
+		Route::get('/aedah/papelaria/produtos/edit/{idp}','App\Http\Controllers\PapelariaController@edit')->name('papelaria.papelaria.produtos.edit')->middleware('auth');
+
+		Route::patch('/aedah/papelaria/produtos/update','App\Http\Controllers\PapelariaController@update')->name('papelaria.papelaria.produtos.update')->middleware('auth');
+
+		Route::get('/aedah/papelaria/produtos/delete/{idp}', 'App\Http\Controllers\PapelariaController@delete')->name('papelaria.papelaria.produtos.destroy')->middleware('auth');

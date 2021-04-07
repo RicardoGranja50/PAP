@@ -233,7 +233,11 @@
 			      						<br>
 			      						<img id="fotos" src="{{asset('imagens/alunos/'.$aluno->foto_aluno)}}">
 			      						<br><br><br><br>
-			      						<h6>Saldo: {{$aluno->saldo}}€</h6>
+										@if($aluno->saldo==0)
+					      					<h6>Saldo: 0€</h6>
+					      				@else
+					      					<h6>Saldo: {{$aluno->saldo}}€</h6>
+					      				@endif
 			      					</div>
 			      				</div>
 							</div>

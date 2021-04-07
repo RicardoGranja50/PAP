@@ -295,4 +295,104 @@ class PapelariaController extends Controller
             return redirect()->route('home');
         }
     }
+
+     public function index(){
+
+        if(auth()->check()){
+            if(Gate::allows('papelaria')){
+                $tipo='papelaria';
+                $produtos=Produto::where('tipo_produto', $tipo)->paginate(12);
+                return view('papelaria.papelaria.produtos_index',[
+                    'produtos'=>$produtos,
+                ]);
+            }
+            else{
+                return redirect()->route('logout');
+            }
+        }
+        else{
+            return redirect()->route('home');
+        }
+    }
+
+    public function edit(Request $req){
+
+        if(auth()->check()){
+            if(Gate::allows('papelaria')){
+
+                $idProduto=$req->idp;
+                $produto=Produto::where('id_produto',$idProduto)->first();
+
+                return view('papelaria.papelaria.produtos_edit',[
+                    'produto'=>$produto,
+                ]);
+            }
+            else{
+                return redirect()->route('logout');
+            }
+        }
+        else{
+            return redirect()->route('home');
+        }
+    }
+
+    public function update(Request $req){
+
+        if(auth()->check()){
+            if(Gate::allows('papelaria')){
+                $idProduto=$req->idp;
+                $produto=Produto::where('id_produto',$idProduto)->first();
+                $imagemAntiga=$produto->foto;
+
+ 
+                $atualizarProduto=$req->validate([
+                    'nome'=>['required','min:3','max:150'],
+                    'preco'=>['required','numeric'],
+                    'foto'=>['nullable','image','max:2000'],
+                ]);
+                
+                if($req->hasFile('foto')){
+
+                    $nomeFoto=$req->file('foto')->getClientOriginalName();
+                    $nomeFoto=time().'_'.$nomeFoto;
+                    $guardarFoto=$req->file('foto')->storeAs('imagens/produtos',$nomeFoto);
+                    
+                    if(!is_null($imagemAntiga)){
+                        $imagemAntiga = 'imagens/produtos/'.$imagemAntiga;
+                        
+                        $b=Storage::disk('public')->delete($imagemAntiga);
+
+                    }
+
+                    $atualizarProduto['foto']=$nomeFoto;
+                }
+
+                $produto->update($atualizarProduto);
+
+                return redirect()->route('papelaria.papelaria.produtos.index')->with('editado','Produto Editado');
+            }
+            else{
+                return redirect()->route('logout');
+            }
+        }
+        else{
+            return redirect()->route('home');
+        }
+    }
+
+    public function delete(Request $r){
+
+        if(auth()->check()){
+            if(Gate::allows('papelaria')){
+                $produto=Produto::where('id_produto',$r->idp)->first();
+                $fotoAntiga=$produto->foto;
+
+                if(!is_null($fotoAntiga)){
+                    Storage::Delete('imagens/produtos/'.$fotoAntiga);
+                }
+                $produto->delete();  
+                return redirect()->route('papelaria.papelaria.produtos.index')->with('eliminada','Produto eliminado!');
+            }
+        }
+    }
 }

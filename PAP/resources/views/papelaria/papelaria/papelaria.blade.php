@@ -65,7 +65,7 @@
 
 
 						<div class="col-md-12">
-							<h6><a href="{{route('papelaria.papelaria.produtos')}}">Adicionar Produto</h6></a>
+							<h6><a href="{{route('papelaria.papelaria.produtos.index')}}">Produtos</h6></a>
 						</div>
 					</div>
 				</div>
@@ -109,7 +109,7 @@
 									<br>
 									Valor total : {{$total_compra}}€
 									<br><br>
-									 @if(session()->has('saldo'))
+									@if(session()->has('saldo'))
 								        <div class="alert alert-danger" role="alert">
 								          {{session('saldo')}}
 								        </div>
@@ -121,7 +121,11 @@
 								<br>
 				      			<img id="fotos" src="{{asset('imagens/alunos/'.$aluno->foto_aluno)}}">
 				      			<br><br><br><br>
-				      			<h6>Saldo: {{$aluno->saldo}}€</h6>
+				      			@if($aluno->saldo==0)
+				      				<h6>Saldo: 0€</h6>
+				      			@else
+				      				<h6>Saldo: {{$aluno->saldo}}€</h6>
+				      			@endif
 							</div>
 						</div>
 					</div>

@@ -18,7 +18,8 @@ class Produto extends Model
       'nome',
       'preco',
       'tipo_produto',
-      'foto'
+      'foto',
+      'cat'
     ];
 
      public function movimentos(){

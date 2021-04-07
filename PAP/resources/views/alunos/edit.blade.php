@@ -128,7 +128,6 @@
 		    		@endif
 			    </div>
 			</div>
-			<br>
 			<h5 style="text-align: center;"><b>Informações Encarregado de Educação</b></h5><br>
 			<div class="form-group">
 	   			<label for="inputEnc"><b>Nome Encarregado de Educação</b></label>
@@ -152,7 +151,7 @@
 		    	@endif
   			</div>
 
-		
+
 		<button type="submit" class="btn btn-primary" style="background-color: #80bfff">Editar</button>
 		<a href="{{route('alunos.showAlunos',['id'=>$aluno->id_aluno, 'idt'=>$aluno->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
 		</form>

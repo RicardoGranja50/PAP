@@ -5,10 +5,11 @@
 @section('a')
 @endsection
 @section('conteudo')
+	
 	<div class="container-fluid">
 		<br>
 		<h3 style="text-align: center;">Criar Produto</h3><br>
-		<form action="{{route('papelaria.papelaria.produtos.store')}}" method="post" enctype="multipart/form-data">
+		<form action="{{route('bar.produtos.store')}}" method="post" enctype="multipart/form-data">
 			@csrf
 		  	<div class="form-row">
 			    <div class="form-group col-md-6">
@@ -33,6 +34,16 @@
 						</div>
 	    			@endif
 				</div>	
+				<div class="form-group col-md-3">
+				   <label><b>Categoria</b></label>
+				   <select name="cat" class="custom-select" value="{{old('cat')}}">
+				   		<option>Categoria...</option>
+				        <option value="Sande">Sande</option>
+				        <option value="Bolo">Bolo</option>
+				        <option value="Bolacha">Bolacha</option>
+				        <option value="Sumo">Sumo</option>
+    				</select>
+				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">

@@ -59,6 +59,7 @@
 			@endif
 			<a href="{{route('turmas.edit',['idt'=>$turma->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff" >Editar turma</a>
 			<a href="{{route('alunos.create')}}" class="btn btn-primary" style="background-color: #80bfff">Adicionar Aluno</a>
+			<a href="{{route('alunos.index')}}" class="btn btn-primary" style="background-color: #80bfff">Turmas</a>
 			<br>
 			<span id="box" style="display:none">
 				<div class="alert alert-danger" role="alert">

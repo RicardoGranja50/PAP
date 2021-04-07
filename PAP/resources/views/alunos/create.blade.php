@@ -126,7 +126,6 @@
 		    		@endif
 			    </div>
 			</div>
-			<br>
 			<h5 style="text-align: center;">Informações Encarregado de Educação</h5><br>
 			<div class="form-group">
 	   			<label for="inputEnc"><b>Nome Encarregado de Educação</b></label>

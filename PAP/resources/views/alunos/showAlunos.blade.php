@@ -26,9 +26,22 @@
 	<h3 style="text-align: center;">Informações de {{$aluno->nome}}</h3><br>
 	@if(!is_null($aluno->foto_aluno))
 		<div class="container-fluid">
-			@if(isset($aluno->foto_aluno))
-				<img src="{{asset('imagens/alunos/'.$aluno->foto_aluno)}}" id="fotos">
-			@endif
+			<div class="row">
+				<div class="col-md-8">
+					@if(isset($aluno->foto_aluno))
+						<img src="{{asset('imagens/alunos/'.$aluno->foto_aluno)}}" id="fotos">
+					@endif
+				</div>
+				@if(Gate::allows('admin'))
+					<div class="col-md-4">
+						@if(is_null($aluno->cartao_aluno))
+							<a class="btn btn-primary" style="background-color: #80bfff" href="{{route('alunos.cartao.create',['id'=>$aluno->id_aluno])}}">Associar Cartão</a>
+						@else
+							Cartão Aluno: {{$aluno->cartao_aluno}}&nbsp&nbsp<a href="{{route('alunos.cartao.edit',['id'=>$aluno->id_aluno])}}"><i class="fas fa-pencil-alt"></i></a>
+						@endif
+					</div>
+				@endif
+			</div>
 		</div>
 	@endif
 

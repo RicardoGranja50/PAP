@@ -144,9 +144,6 @@ class AlunosController extends Controller
                 $cartao=Aluno::max('cartao_aluno');
                 
 
-                $cartao=$cartao+'1';
-
-                $novoAluno['cartao_aluno']=$cartao;
 
                 if($req->hasFile('foto_aluno')){
                     $nomeFoto=$req->file('foto_aluno')->getClientOriginalName();
@@ -227,6 +224,96 @@ class AlunosController extends Controller
             	$aluno->update($atualizarAluno);
 
             	return redirect()->route('alunos.index')->with('editado','Aluno Editado');
+            }
+        }
+        else{
+            return redirect()->route('alunos.index')->with('eliminada','Não tem permissão !');
+        }
+    }
+
+    public function createCartao(Request $req){
+
+         if(auth()->check()){
+             if(Gate::allows('admin')){
+                $aluno= Aluno::where('id_aluno',$req->id)->first();
+                return view('alunos.create_cartao',[
+                    'aluno'=>$aluno
+                ]);
+            }
+            else{
+                return redirect()->route('alunos.index')->with('eliminada','Não tem permissão !');
+            }
+        }
+    }
+
+    public function storeCartao(Request $req){
+
+
+        if(auth()->check()){
+            if(Gate::allows('admin')){
+                $idAluno=$req->id;
+                $aluno=Aluno::where('id_aluno',$idAluno)->first();
+                
+
+                $atualizarAluno=$req->validate([
+                    'cartao_aluno'=>['required','numeric']
+                ]);
+                
+                $erro=Aluno::where('cartao_aluno',$req->cartao_aluno)->first();
+                if(!empty($erro)){
+                    return redirect()->route('alunos.cartao.create',[
+                        'id'=>$idAluno
+                    ])->with('eliminada','Cartao existente');
+                }
+
+                $aluno->update($atualizarAluno);
+
+                return redirect()->route('alunos.index')->with('editado','Aluno Editado');
+            }
+        }
+        else{
+            return redirect()->route('alunos.index')->with('eliminada','Não tem permissão !');
+        }
+    }
+
+    public function editCartao(Request $req){
+
+         if(auth()->check()){
+             if(Gate::allows('admin')){
+                $aluno= Aluno::where('id_aluno',$req->id)->first();
+                return view('alunos.edit_cartao',[
+                    'aluno'=>$aluno
+                ]);
+            }
+            else{
+                return redirect()->route('alunos.index')->with('eliminada','Não tem permissão !');
+            }
+        }
+    }
+
+    public function updateCartao(Request $req){
+
+
+        if(auth()->check()){
+            if(Gate::allows('admin')){
+                $idAluno=$req->id;
+                $aluno=Aluno::where('id_aluno',$idAluno)->first();
+                
+
+                $atualizarAluno=$req->validate([
+                    'cartao_aluno'=>['required','numeric']
+                ]);
+                
+                $erro=Aluno::where('cartao_aluno',$req->cartao_aluno)->first();
+                if(!empty($erro)){
+                    return redirect()->route('alunos.cartao.create',[
+                        'id'=>$idAluno
+                    ])->with('eliminada','Cartao existente');
+                }
+
+                $aluno->update($atualizarAluno);
+
+                return redirect()->route('alunos.index')->with('editado','Aluno Editado');
             }
         }
         else{

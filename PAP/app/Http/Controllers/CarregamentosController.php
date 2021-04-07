@@ -52,12 +52,12 @@ class CarregamentosController extends Controller
 
          if(auth()->check()){
             if(Gate::allows('papelaria')){
-            	$idAluno=$req->idAluno;
-            	$aluno=Aluno::where('id_aluno',$idAluno)->first();
+            	$cartao=$req->idAluno;
+            	$aluno=Aluno::where('cartao_aluno',$cartao)->first();
 
             	if(!empty($aluno)){
             		return redirect()->route('papelaria.carregamentos.carregamentos',[
-            			'id'=>$idAluno
+            			'id'=>$aluno->id_aluno
             		]);
             	}
             	else{
