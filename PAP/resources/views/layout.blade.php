@@ -57,6 +57,7 @@
                 @if(Gate::allows('admin'))
                   <br><a href="{{route('bar.bar.exec')}}">Bar</a><br>
                   <a>Papelaria</a>
+                  <br><a href="{{route('transacao.show')}}">Transações</a><br>
                 @endif
             </div>
           </div>

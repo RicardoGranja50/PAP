@@ -39,6 +39,10 @@
 						@else
 							Cartão Aluno: {{$aluno->cartao_aluno}}&nbsp&nbsp<a href="{{route('alunos.cartao.edit',['id'=>$aluno->id_aluno])}}"><i class="fas fa-pencil-alt"></i></a>
 						@endif
+						<div class="col-md-12">
+							<br>
+							<a class="btn btn-primary" style="background-color: #80bfff" href="{{route('transacao.aluno.show',['id'=>$aluno->id_aluno])}}">Transações</a>
+						</div>
 					</div>
 				@endif
 			</div>

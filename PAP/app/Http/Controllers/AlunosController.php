@@ -8,6 +8,7 @@ use App\Models\Turma;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Movimento;
 
 class AlunosController extends Controller
 {
@@ -319,5 +320,23 @@ class AlunosController extends Controller
         else{
             return redirect()->route('alunos.index')->with('eliminada','Não tem permissão !');
         }
+    }
+
+    public function transacao(){
+
+        $mov=Movimento::orderBy('created_at', 'desc')->with('alunos')->paginate(25);
+        return view('alunos.transacao_show',[
+            'mov'=>$mov,
+        ]);
+    }
+
+    public function transacaoAluno(Request $req){
+
+        $aluno=Aluno::where('id_aluno', $req->id)->first();
+        $mov=Movimento::where('id_aluno', $req->id)->orderBy('created_at', 'desc')->paginate(25);
+        return view('alunos.transacao_aluno_show',[
+            'mov'=>$mov,
+            'aluno'=>$aluno
+        ]);
     }
 }

@@ -162,3 +162,10 @@ use Illuminate\Support\Facades\Route;
 		Route::patch('/aedah/papelaria/produtos/update','App\Http\Controllers\PapelariaController@update')->name('papelaria.papelaria.produtos.update')->middleware('auth');
 
 		Route::get('/aedah/papelaria/produtos/delete/{idp}', 'App\Http\Controllers\PapelariaController@delete')->name('papelaria.papelaria.produtos.destroy')->middleware('auth');
+
+
+//Transações
+	
+	Route::get('/aedah/transacoes', 'App\Http\Controllers\AlunosController@transacao')->name('transacao.show')->middleware('auth');
+
+	Route::get('/aedah/transacoes/aluno/{id}', 'App\Http\Controllers\AlunosController@transacaoAluno')->name('transacao.aluno.show')->middleware('auth');
