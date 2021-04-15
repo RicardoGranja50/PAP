@@ -53,5 +53,8 @@
 		</div>
 	</div><br>{{$mov->render()}}
 	<br>
-	<a href="{{route('alunos.showAlunos', ['id'=>$aluno->id_aluno,'idt'=>$aluno->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
+	<div class="container-fluid">
+		<a href="{{route('alunos.showAlunos', ['id'=>$aluno->id_aluno,'idt'=>$aluno->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
+		<a href="{{route('extrato.aluno')}}" class="btn btn-primary" style="background-color: #80bfff">Extrato do Aluno</a>
+	</div>
 @endsection

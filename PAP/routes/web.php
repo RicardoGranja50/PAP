@@ -128,9 +128,15 @@ use Illuminate\Support\Facades\Route;
 
 	//Bar
 
-		Route::get('/aedah/bar/{id}/{cat}','App\Http\Controllers\BarController@bar')->name('bar.bar')->middleware('auth');
+		Route::get('/aedah/bar/{id}/{cat}','App\Http\Controllers\PapelariaController@papelaria')->name('bar.bar')->middleware('auth');
 
-		Route::get('/aedah/bar/idAluno/exec','App\Http\Controllers\BarController@exec')->name('bar.bar.exec')->middleware('auth');
+		Route::post('/aedah/bar/idAluno/exec','App\Http\Controllers\BarController@exec')->name('bar.bar.exec')->middleware('auth');
+
+		Route::get('/aedah/bar/obterMovimentos/{id}/{tipo}/{idp}','App\Http\Controllers\PapelariaController@obterMovimentos')->name('bar.bar.obterMovimentos')->middleware('auth');
+
+		Route::get('/aedah/bar/delete/produto/compra/{idp}/{id}', 'App\Http\Controllers\PapelariaController@destroy')->name('bar.bar.compra.delete')->middleware('auth');
+
+		Route::get('/aedah/bar/produto/compra/comprar/{id}/{total}','App\Http\Controllers\PapelariaController@compraFinal')->name('bar.bar.compra.comprar')->middleware('auth');
 
 
 //Produtos
@@ -169,3 +175,7 @@ use Illuminate\Support\Facades\Route;
 	Route::get('/aedah/transacoes', 'App\Http\Controllers\AlunosController@transacao')->name('transacao.show')->middleware('auth');
 
 	Route::get('/aedah/transacoes/aluno/{id}', 'App\Http\Controllers\AlunosController@transacaoAluno')->name('transacao.aluno.show')->middleware('auth');
+
+	//ExtartoPDF
+
+		Route::get('/aedah/transacoes/pdf', 'App\Http\Controllers\AlunosController@extrato_pdf')->name('extrato.aluno')->middleware('auth');

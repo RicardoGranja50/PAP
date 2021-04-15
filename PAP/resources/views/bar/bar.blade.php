@@ -63,6 +63,20 @@
     			left: 70px;
     			margin-bottom: 15px;
 			}
+
+			.branco {
+  				color: white;
+			}
+			.branco:hover{
+				color: white;
+			}
+
+			.preto {
+  				color: black;
+			}
+			.preto:hover{
+				color: black;
+			}
 	    </style>
 	<br>
 		<h3 align="center">Bar</h3>
@@ -78,10 +92,10 @@
 
 						<div class="col-md-12">
 							<div class="tony">
-								<div><a href="{{route('bar.bar',['id'=>'$aluno->id_aluno','cat'=>'sumos'])}}"><img class="categoria" src="{{asset('imagens/cat_bar/sumos.png')}}"><p align="center">Sumos</p></a></div>
-								<div><img class="categoria" src="{{asset('imagens/cat_bar/sandes.png')}}"><p align="center">Sandes</p></div>
-								<div><img class="categoria" src="{{asset('imagens/cat_bar/bolos.png')}}"><p align="center">Bolos</p></div>
-								<div><img class="categoria" src="{{asset('imagens/cat_bar/bolachas.png')}}"><p align="center">Bolachas</p></div>
+								<div><a class="preto"href="{{route('bar.bar',['id'=>$aluno->id_aluno,'cat'=>'sumo'])}}"><img class="categoria" src="{{asset('imagens/cat_bar/sumos.png')}}"><p align="center">Sumos</p></a></div>
+								<div><a class="preto"href="{{route('bar.bar',['id'=>$aluno->id_aluno,'cat'=>'sande'])}}"><img class="categoria" src="{{asset('imagens/cat_bar/sandes.png')}}"><p align="center">Sandes</p></a></div>
+								<div><a class="preto"href="{{route('bar.bar',['id'=>$aluno->id_aluno,'cat'=>'bolo'])}}"><img class="categoria" src="{{asset('imagens/cat_bar/bolos.png')}}"><p align="center">Bolos</p></a></div>
+								<div><a class="preto"href="{{route('bar.bar',['id'=>$aluno->id_aluno,'cat'=>'bolacha'])}}"><img class="categoria" src="{{asset('imagens/cat_bar/bolachas.png')}}"><p align="center">Bolachas</p></a></div>
 							</div>
 							<br>
 							<h6><a href="{{route('bar.produtos')}}">Produtos</h6></a>
@@ -90,20 +104,93 @@
 				</div>
 
 
-				<div class="col-md-6">
+				<div class="col-md-5">
 					<div class="row">
 						<div class="col-md-12 cabecalho">
-							<h5>Produtos</h5>
+							<h5><a class="branco" href="{{route('bar.bar',['id'=>$aluno->id_aluno,'cat'=>'tudo'])}}">Produtos</a></h5>
 						</div>
+
+						<div class="col-md-12">
+							<div class="row">
+								@foreach($produtos as $produto)
+									<div class="col-md-3">
+										<a href="{{route('bar.bar.obterMovimentos',['idp'=>$produto->id_produto,'id'=>$aluno->id_aluno, 'tipo'=>'compra'])}}">
+											<img id="fotos" src="{{asset('imagens/produtos/'.$produto->foto)}}"><br>
+											<h6>{{$produto->nome}}</h6><br><br><br>
+										</a>
+									</div>
+								@endforeach
+
+							</div>{{$produtos->render()}}
+						</div>
+
+
 					</div>
 				</div>
 
 
-				<div class="col-md-4">
+				<div class="col-md-5">
 					<div class="row">
 						<div class="col-md-12 cabecalho">
 							<h5>Aluno</h5>
 						</div>
+						<div class="col-md-12">
+							<h5 align="center">{{$aluno->nome}}</h5>
+						</div>
+						<div class="col-md-12">
+							<div class="row">
+							<div class="col-md-6">
+									<h6>Compra:</h6>
+									<div class="scroll col-md-12">
+										<div class="row">
+											<div class="col-md-9">
+												@if(isset($produto_compra))
+													@if(count($produto_compra)>0)
+														@foreach($produto_compra as $add)
+															{{--<i class="fas fa-arrow-circle-right">--}} </i>{{$add->nome}} x{{$add->pivot->quantidade}}<br>
+															{{$add->pivot->valor}}€
+															<br><br>
+														@endforeach
+													@endif
+												@endif
+											</div>
+											<div class="col-md-3">
+												@if(isset($produto_compra))
+													@if(count($produto_compra)>0) 
+														@foreach($produto_compra as $add)
+															<a href="{{route('bar.bar.compra.delete',['idp'=>$add->id_produto,'id'=>$aluno->id_aluno])}}"><i class="far fa-times-circle"></i></a>
+															<br><br><br>
+														@endforeach
+													@endif
+												@endif
+											</div>
+										</div>
+									</div>
+									<br>
+									Valor total : {{$total_compra}}€
+									<br><br>
+									@if(session()->has('saldo'))
+								        <div class="alert alert-danger" role="alert">
+								          {{session('saldo')}}
+								        </div>
+								    @endif
+									<a href="{{route('bar.bar.compra.comprar',['id'=>$aluno->id_aluno,'total'=>$total_compra])}}" class="btn btn-primary" style="background-color: #80bfff">Comprar</a>
+								</div>
+								
+							<div class="col-md-6">
+								<br>
+				      			<img id="fotos" src="{{asset('imagens/alunos/'.$aluno->foto_aluno)}}">
+				      			<br><br><br><br>
+				      			@if($aluno->saldo==0)
+				      				<h6>Saldo: 0€</h6>
+				      			@else
+				      				<h6>Saldo: {{$aluno->saldo}}€</h6>
+				      			@endif
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
 					</div>
 				</div>
 			</div>

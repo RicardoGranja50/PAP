@@ -63,20 +63,19 @@ class BarController extends Controller
             if(Gate::allows('bar')){
 
                 $aluno=Aluno::where('id_aluno',$req->id)->first();
-
-                if (empty($req->tipo)) {
-                   $cat='tudo';
+                $tipo='bar';
+                $a=$req->cat;
+                if ($a=='tudo') {
+                   $produtos=Produto::where('tipo_produto',$tipo)->paginate(12);
                 }
                 else{
-                    $cat=$req->tipo;
+                    $produtos=Produto::where('tipo_produto',$tipo)->where('cat',$a)->paginate(12);
                 }
 
-                $tipo='bar';
-                $produtos=Produto::where('tipo_produto',$tipo);
-                
                 return view('bar.bar',[
-                    'cat'=>$cat,
+                    'cat'=>$a,
                     'aluno'=>$aluno,
+                    'produtos'=>$produtos
                 ]);
             }
             else{

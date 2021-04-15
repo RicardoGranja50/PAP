@@ -19,7 +19,7 @@
 				<h5 align="center">Cartão Aluno</h5><br>
 				<form action="{{route('papelaria.carregamentos.exec')}}">
 					<label for="idAluno"></label>
-	  				<input type="text" name="idAluno">
+	  				<input type="text" name="idAluno" autofocus>
 	  				<button type="submit" class="btn btn-primary" style="background-color: #80bfff">Confirmar</button>
 	  				
 	  				@if(session()->has('msg'))

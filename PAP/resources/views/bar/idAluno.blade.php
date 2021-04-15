@@ -17,9 +17,10 @@
 		<div class="box">
 			<nav class="bg-white">
 				<h5 align="center">Cartão Aluno</h5><br>
-				<form action="{{route('bar.bar.exec')}}">
+				<form action="{{route('bar.bar.exec')}}" method="post">
+					@csrf
 					<label for="idAluno"></label>
-	  				<input type="text" name="idAluno">
+	  				<input type="text" name="idAluno" autofocus>
 	  				<button type="submit" class="btn btn-primary" style="background-color: #80bfff">Confirmar</button>
 	  				
 	  				@if(session()->has('msg'))

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Movimento;
+use PDF;
 
 class AlunosController extends Controller
 {
@@ -338,5 +339,15 @@ class AlunosController extends Controller
             'mov'=>$mov,
             'aluno'=>$aluno
         ]);
+    }
+
+    function extrato_pdf() {
+
+        $data = [
+            'foo' => 'bar'
+
+        ];
+        $pdf = PDF::loadView('alunos.extrato_aluno', $data);
+        return $pdf->stream('document.pdf');
     }
 }
