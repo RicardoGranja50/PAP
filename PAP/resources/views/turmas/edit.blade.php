@@ -1,12 +1,12 @@
 @extends('layout')
 @section('titulo')
-	Editar Aluno
+	Editar Turma
 @endsection
 @section('pesquisaAluno')
 @endsection
 @section('conteudo')
 	<br>
-	<h3 style="text-align: center;">Adicionar Turma</h3><br>
+	<h3 style="text-align: center;">Editar Turma</h3><br>
 	<br>
 	<div class="container-fluid">
 		<form action="{{route('turmas.update',['idt'=>$turma->id_turma])}}" method="post">
@@ -42,10 +42,10 @@
 			    <div class="form-group col-md-6">
 					  <label><b>Ano</b></label>
 					  <select class="custom-select my-1 mr-sm-2" name="ano" value="{{$turma->ano}}">
-						    <option selected>Escolha...</option>
-						    <option value="10º">10º</option>
-						    <option value="11º">11º</option>
-						    <option value="12º">12º</option>
+						    <!-- <option selected>Escolha...</option> -->
+						    <option value="10º" @if($turma->ano=='10º')selected @endif>10º</option>
+						    <option value="11º" @if($turma->ano=='11º')selected @endif>11º</option>
+						    <option value="12º" @if($turma->ano=='12º')selected @endif>12º</option>
 					  </select>
 					@if($errors->has('ano'))
 					    <div class="alert alert-danger" role="alert">

@@ -4,6 +4,9 @@
 <head>
   <meta charset="utf-8"/>
   <title>
+  	@section('titulo')
+		Cartão
+	@endsection
     @yield('titulo')
   </title>
    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">

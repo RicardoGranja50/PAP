@@ -4,6 +4,9 @@
 <head>
   <meta charset="utf-8"/>
   <title>
+  	@section('titulo')
+		Cartão
+	@endsection
     @yield('titulo')
   </title>
    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
@@ -19,7 +22,7 @@
 				<h5 align="center">Cartão Aluno</h5><br>
 				<form action="{{route('papelaria.carregamentos.exec')}}">
 					<label for="idAluno"></label>
-	  				<input type="text" name="idAluno" autofocus>
+	  				<input type="text" name="idAluno" autofocus id="caixa">
 	  				<button type="submit" class="btn btn-primary" style="background-color: #80bfff">Confirmar</button>
 	  				
 	  				@if(session()->has('msg'))
@@ -45,10 +48,12 @@
 		width: 300px;
 		height: 300px;
 
-	}
-	body {
-		margin: 0px;
-	}
+
+		}
+
+		body {
+			margin: 0px;
+		}
 </style>
 </body>
 </html>

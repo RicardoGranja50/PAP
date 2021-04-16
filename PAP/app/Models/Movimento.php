@@ -20,7 +20,8 @@ class Movimento extends Model
         'tipo_movimento',
         'id_aluno',
         'created_at',
-        'carrinho'
+        'carrinho',
+        'entrada_saida'
     ];
 
     public function alunos(){

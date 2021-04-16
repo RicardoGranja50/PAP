@@ -98,7 +98,7 @@
 								<div><a class="preto"href="{{route('bar.bar',['id'=>$aluno->id_aluno,'cat'=>'bolacha'])}}"><img class="categoria" src="{{asset('imagens/cat_bar/bolachas.png')}}"><p align="center">Bolachas</p></a></div>
 							</div>
 							<br>
-							<h6><a href="{{route('bar.produtos')}}">Produtos</h6></a>
+							<h6><a href="{{route('bar.produtos')}}">Produtos</a></h6>
 						</div>
 					</div>
 				</div>

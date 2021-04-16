@@ -1,0 +1,17 @@
+
+<div class="wrapper">
+
+
+
+
+		.wrapper {
+		    width: 100px;
+		    height: 30px;
+		    overflow: hidden;
+		}
+		.wrapper input {
+		    width: 120px;
+		    height: 30px;
+		    margin-left: -300px;
+		    text-align: left;
+		}

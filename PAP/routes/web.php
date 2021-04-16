@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 	
 	//Criar 
 
-		Route::get('/aedah/alunos/add','App\Http\Controllers\AlunosController@create')->name('alunos.create')->middleware('auth');
+		Route::get('/aedah/alunos/add/{idt}','App\Http\Controllers\AlunosController@create')->name('alunos.create')->middleware('auth');
 
 		Route::post('/aedah/alunos/criado','App\Http\Controllers\AlunosController@store')->name('alunos.store')->middleware('auth');
 
@@ -179,3 +179,11 @@ use Illuminate\Support\Facades\Route;
 	//ExtartoPDF
 
 		Route::get('/aedah/transacoes/pdf', 'App\Http\Controllers\AlunosController@extrato_pdf')->name('extrato.aluno')->middleware('auth');
+
+
+
+//Portaria
+
+		Route::get('/aedah/portaria', 'App\Http\Controllers\PortariaController@portaria')->name('portaria.index')->middleware('auth');
+
+		Route::post('/aedah/portaria/form', 'App\Http\Controllers\PortariaController@formulario')->name('portaria.form')->middleware('auth');

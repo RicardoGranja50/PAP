@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Aluno;
+use App\Models\Movimento;
 use App\Models\Produto;
 
 
@@ -37,11 +38,22 @@ class BarController extends Controller
                 $cartao=$req->idAluno;
                 $aluno=Aluno::where('cartao_aluno',$cartao)->first();
                 $cat='tudo';
+
+
                 if(!empty($aluno)){
-                    return redirect()->route('bar.bar',[
-                        'id'=>$aluno->id_aluno,
-                        'cat'=>$cat
-                    ]);
+                    $hoje=now()->startOfDay();
+                    $entrada_saida=Movimento::where('id_aluno',$aluno->id_aluno)->where('tipo_movimento','portaria')->where('created_at','>',$hoje)->orderBy('id_movimento','desc')->first();
+                    if(!is_null($entrada_saida)){
+                        if($entrada_saida->entrada_saida==0){
+                            return redirect()->route('bar.bar',[
+                                'id'=>$aluno->id_aluno,
+                                'cat'=>$cat
+                            ]);
+                        }
+                        else{
+                            return redirect()->route('bar.idAluno')->with('msg','O aluno não passou a pulseira na portaria!');
+                        }
+                    }
                 }
                 else{
                     return redirect()->route('bar.idAluno')->with('msg','O aluno não existe');

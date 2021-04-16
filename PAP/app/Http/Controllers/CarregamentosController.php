@@ -55,10 +55,21 @@ class CarregamentosController extends Controller
             	$cartao=$req->idAluno;
             	$aluno=Aluno::where('cartao_aluno',$cartao)->first();
 
-            	if(!empty($aluno)){
-            		return redirect()->route('papelaria.carregamentos.carregamentos',[
-            			'id'=>$aluno->id_aluno
-            		]);
+
+
+            	if(!empty($aluno)){ 
+                    $hoje=now()->startOfDay();
+                    $entrada_saida=Movimento::where('id_aluno',$aluno->id_aluno)->where('tipo_movimento','portaria')->where('created_at','>',$hoje)->orderBy('id_movimento','desc')->first();
+                    if(!is_null($entrada_saida)){
+                        if($entrada_saida->entrada_saida==0){
+                            return redirect()->route('papelaria.carregamentos.carregamentos',[
+                                'id'=>$aluno->id_aluno
+                            ]);
+                        }
+                        else{
+                            return redirect()->route('papelaria.carregamentos.idAluno')->with('msg','O aluno não passou a pulseira na portaria!');
+                        }
+                    }
             	}
             	else{
             		return redirect()->route('papelaria.carregamentos.idAluno')->with('msg','O aluno não existe');

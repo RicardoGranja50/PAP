@@ -40,6 +40,7 @@
 
         @if(!Gate::allows('papelaria'))
            @if(!Gate::allows('bar'))
+              @if(!Gate::allows('portaria'))
           
           <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
@@ -61,6 +62,7 @@
                 @endif
             </div>
           </div>
+            @endif
           @endif
       @endif 
 @yield('a')

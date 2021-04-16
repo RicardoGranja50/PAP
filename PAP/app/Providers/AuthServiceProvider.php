@@ -52,5 +52,14 @@ class AuthServiceProvider extends ServiceProvider
                 return false;
             }
         });
+
+        Gate::define('portaria',function($user){
+            if($user->tipo_user=='portaria'){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
     }
 }

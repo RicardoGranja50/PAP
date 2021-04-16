@@ -48,7 +48,6 @@
 				<div class="form-group col-md-3">
 				   <label><b>Turma</b></label>
 				   <select name="id_turma" class="custom-select">
-				   		<option>Turma...</option>
 				        @foreach($turmas as $turma)
 				            <option value="{{$turma->id_turma}}" @if($turma->id_turma==$aluno->id_turma)selected @endif>{{$turma->ano}}{{$turma->curso_abreviacao}}</option>
 				        @endforeach

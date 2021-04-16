@@ -31,6 +31,9 @@ class HomeController extends Controller
             elseif(Gate::allows('bar')){
                 return redirect()->route('bar.idAluno');
             }
+            elseif(Gate::allows('portaria')){
+                return redirect()->route('portaria.index');
+            }
             else{
                 return redirect()->route('alunos.index');
             }

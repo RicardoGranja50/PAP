@@ -107,13 +107,15 @@ class AlunosController extends Controller
     }
     
 
-    public function create(){
+    public function create(Request $req){
 
         if(auth()->check()){
              if(Gate::allows('admin')){
+
          		$turmas=Turma::all();
             	return view('alunos.create',[
             		'turmas'=>$turmas,
+                    'idt'=>$req->idt
             	]);
             }
             else{
