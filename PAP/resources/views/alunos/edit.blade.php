@@ -152,7 +152,7 @@
 
 
 		<button type="submit" class="btn btn-primary" style="background-color: #80bfff">Editar</button>
-		<a href="{{route('alunos.showAlunos',['id'=>$aluno->id_aluno, 'idt'=>$aluno->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
+		<a href="{{route('alunos.show',['id'=>$aluno->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
 		</form>
 	</div>
 @endsection

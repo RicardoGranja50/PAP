@@ -57,7 +57,7 @@
 			</div>
 			
 			<button type="submit" class="btn btn-primary" value="enviar" style="background-color: #80bfff">Editar</button>
-			<a href="{{route('alunos.index')}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
+			<a href="{{route('alunos.show',['id'=>$turma->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
 		</form>
 	</div>
 @endsection
