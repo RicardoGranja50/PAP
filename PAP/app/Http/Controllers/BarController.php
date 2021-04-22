@@ -45,6 +45,7 @@ class BarController extends Controller
                     $entrada_saida=Movimento::where('id_aluno',$aluno->id_aluno)->where('tipo_movimento','portaria')->where('created_at','>',$hoje)->orderBy('id_movimento','desc')->first();
                     if(!is_null($entrada_saida)){
                         if($entrada_saida->entrada_saida==0){
+
                             return redirect()->route('bar.bar',[
                                 'id'=>$aluno->id_aluno,
                                 'cat'=>$cat
@@ -53,6 +54,9 @@ class BarController extends Controller
                         else{
                             return redirect()->route('bar.idAluno')->with('msg','O aluno não passou a pulseira na portaria!');
                         }
+                    }
+                    else{
+                            return redirect()->route('bar.idAluno')->with('msg','O aluno não passou a pulseira na portaria!');
                     }
                 }
                 else{

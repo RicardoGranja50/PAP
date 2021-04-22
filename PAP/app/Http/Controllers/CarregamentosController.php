@@ -70,6 +70,9 @@ class CarregamentosController extends Controller
                             return redirect()->route('papelaria.carregamentos.idAluno')->with('msg','O aluno não passou a pulseira na portaria!');
                         }
                     }
+                    else{
+                        return redirect()->route('papelaria.carregamentos.idAluno')->with('msg','O aluno não passou a pulseira na portaria!');
+                    }
             	}
             	else{
             		return redirect()->route('papelaria.carregamentos.idAluno')->with('msg','O aluno não existe');

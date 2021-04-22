@@ -1,6 +1,36 @@
 @extends('layouts.app')
-
+ <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
+    <script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/all.min.js')}}"></script>
 @section('content')
+<style type="text/css">
+    .bg-music{
+        position: absolute;
+        top: 64%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+
+    .btn-1{
+        background-color: transparent;
+        color: #fff;
+        font-size: 78px;
+        border: none;
+        margin: 0 auto;
+        opacity: .3;
+        transition: all linear .2s;
+    }
+    .btn-1:hover{
+        opacity: 1;
+    }
+
+    .fa-pause-circle{
+        display: none;
+    }
+</style>
 <br><br>
 <div class="container">
     <div class="row justify-content-center">
@@ -72,5 +102,29 @@
             </div>
         </div>
     </div>
+    <div class="bg-music" align="center">
+        <audio id="myMusic" src="{{asset('music/fundo.mp3')}}" loop=""></audio>
+        <button class="btn-1">
+            <i class="far fa-play-circle"></i>
+            <i class="far fa-pause-circle"></i>
+        </button>
+    </div>
 </div>
+
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+        $(".btn-1 .fa-play-circle").on('click', function(){
+            $(this).hide();
+            $(".fa-pause-circle").fadeIn();
+            $("#myMusic")[0].play();
+        });
+
+        $(".btn-1 .fa-pause-circle").on('click', function(){
+            $(this).hide();
+            $(".fa-play-circle").fadeIn();
+            $("#myMusic").pause();
+        });
+    });
+</script>
 @endsection

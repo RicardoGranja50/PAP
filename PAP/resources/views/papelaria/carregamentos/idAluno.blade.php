@@ -1,3 +1,4 @@
+@extends('layout')
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html>
@@ -7,7 +8,6 @@
   	@section('titulo')
 		Cartão
 	@endsection
-    @yield('titulo')
   </title>
    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
