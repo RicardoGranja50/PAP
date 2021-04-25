@@ -14,10 +14,10 @@ class CarregamentosController extends Controller
     public function index(Request $req){
 
         if(auth()->check()){
-            if(Gate::allows('papelaria')){
+            if(Gate::allows('papelaria') || Gate::allows('admin')){
                 $idAluno=$req->id;
                 $aluno=Aluno::where('id_aluno',$idAluno)->first();
-                $movimento=Movimento::where('id_aluno',$idAluno)->orderBy('id_movimento','desc')->paginate(10);
+                $movimento=Movimento::where('id_aluno',$idAluno)->where('tipo_movimento','carregamento')->orderBy('id_movimento','desc')->paginate(10);
                 
             	return view('papelaria.carregamentos.carregamentos',[
                     'aluno'=>$aluno,
@@ -36,7 +36,7 @@ class CarregamentosController extends Controller
     public function idAluno(){
 
         if(auth()->check()){
-            if(Gate::allows('papelaria')){
+            if(Gate::allows('papelaria') || Gate::allows('admin')){
     	       return view('papelaria.carregamentos.idAluno');
             }
             else{
@@ -51,7 +51,7 @@ class CarregamentosController extends Controller
     public function exec(Request $req){
 
          if(auth()->check()){
-            if(Gate::allows('papelaria')){
+            if(Gate::allows('papelaria') || Gate::allows('admin')){
             	$cartao=$req->idAluno;
             	$aluno=Aluno::where('cartao_aluno',$cartao)->first();
 
@@ -90,7 +90,7 @@ class CarregamentosController extends Controller
     public function carregamentos(Request $req){
         
         if(auth()->check()){
-            if(Gate::allows('papelaria')){
+            if(Gate::allows('papelaria') || Gate::allows('admin')){
                 $carregamento=$req->display_final;
                 
                 $idAluno=$req->id;

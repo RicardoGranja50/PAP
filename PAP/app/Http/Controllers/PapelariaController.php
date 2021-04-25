@@ -30,7 +30,7 @@ class PapelariaController extends Controller
             $totalItems=12;
         }
     	if(auth()->check()){
-            if(Gate::allows('papelaria') || Gate::allows('bar')){
+            if(Gate::allows('papelaria') || Gate::allows('bar') || Gate::allows('admin')){
                 if($a=='tudo' || is_null($a)) {
                     $produto=Produto::where('tipo_produto',$tipo)->paginate($totalItems);
                 }
@@ -133,7 +133,7 @@ class PapelariaController extends Controller
     public function create(){
 
     	if(auth()->check()){
-            if(Gate::allows('papelaria')){
+            if(Gate::allows('papelaria') || Gate::allows('admin')){
             	return view('papelaria.papelaria.produtos');
             }
             else{
@@ -148,7 +148,7 @@ class PapelariaController extends Controller
     public function store(Request $req){
 
         if(auth()->check()){
-            if(Gate::allows('papelaria')){
+            if(Gate::allows('papelaria') || Gate::allows('admin')){
                 $novoProduto=$req->validate([
                     'nome'=>['required','min:3','max:150'],
                     'preco'=>['required','numeric'],
@@ -183,7 +183,7 @@ class PapelariaController extends Controller
     function obterMovimentos (Request $req) {
 
         if(auth()->check()){
-            if(Gate::allows('papelaria')|| Gate::allows('bar')){
+            if(Gate::allows('papelaria')|| Gate::allows('bar') || Gate::allows('admin')){
 
                 if($req->is('aedah/papelaria/*')){
                     $tipo='papelaria';
@@ -262,7 +262,7 @@ class PapelariaController extends Controller
 
 
          if(auth()->check()){
-            if(Gate::allows('papelaria') || Gate::allows('bar')){
+            if(Gate::allows('papelaria') || Gate::allows('bar') || Gate::allows('admin')){
                 $movimento=Movimento::where('id_aluno',$req->id)->where('carrinho',1)->with('produtos')->first();
                 $mov = $movimento->produtos;
                 $produto=Produto::where('id_produto',$req->idp)->first();
@@ -315,7 +315,7 @@ class PapelariaController extends Controller
 
 
          if(auth()->check()){
-            if(Gate::allows('papelaria') || Gate::allows('bar')){
+            if(Gate::allows('papelaria') || Gate::allows('bar') || Gate::allows('admin')){
                 $movimento=Movimento::where('id_aluno',$req->id)->where('carrinho',1)->with('produtos')->first();
                 $saldo_aluno=Aluno::where('id_aluno',$req->id)->first();
 
@@ -360,7 +360,7 @@ class PapelariaController extends Controller
      public function index(){
 
         if(auth()->check()){
-            if(Gate::allows('papelaria')){
+            if(Gate::allows('papelaria') || Gate::allows('admin')){
                 $tipo='papelaria';
                 $produtos=Produto::where('tipo_produto', $tipo)->paginate(12);
                 return view('papelaria.papelaria.produtos_index',[
@@ -379,7 +379,7 @@ class PapelariaController extends Controller
     public function edit(Request $req){
 
         if(auth()->check()){
-            if(Gate::allows('papelaria')){
+            if(Gate::allows('admin')){
 
                 $idProduto=$req->idp;
                 $produto=Produto::where('id_produto',$idProduto)->first();
@@ -400,7 +400,7 @@ class PapelariaController extends Controller
     public function update(Request $req){
 
         if(auth()->check()){
-            if(Gate::allows('papelaria')){
+            if(Gate::allows('admin')){
                 $idProduto=$req->idp;
                 $produto=Produto::where('id_produto',$idProduto)->first();
                 $imagemAntiga=$produto->foto;
@@ -444,7 +444,7 @@ class PapelariaController extends Controller
     public function delete(Request $r){
 
         if(auth()->check()){
-            if(Gate::allows('papelaria')){
+            if(Gate::allows('admin')){
                 $produto=Produto::where('id_produto',$r->idp)->first();
                 $fotoAntiga=$produto->foto;
 

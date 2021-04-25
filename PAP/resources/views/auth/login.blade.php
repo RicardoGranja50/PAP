@@ -123,7 +123,7 @@
         $(".btn-1 .fa-pause-circle").on('click', function(){
             $(this).hide();
             $(".fa-play-circle").fadeIn();
-            $("#myMusic").pause();
+            $("#myMusic")[0].pause();
         });
     });
 </script>

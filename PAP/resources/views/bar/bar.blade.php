@@ -98,7 +98,7 @@
 								<div><a class="preto"href="{{route('bar.bar',['id'=>$aluno->id_aluno,'cat'=>'bolacha'])}}"><img class="categoria" src="{{asset('imagens/cat_bar/bolachas.png')}}"><p align="center">Bolachas</p></a></div>
 							</div>
 							<br>
-							<h6><a href="{{route('bar.produtos')}}">Produtos</a></h6>
+							<!-- <h6><a href="{{route('bar.produtos')}}">Produtos</a></h6> -->
 						</div>
 					</div>
 				</div>
@@ -175,6 +175,23 @@
 								        </div>
 								    @endif
 									<a href="{{route('bar.bar.compra.comprar',['id'=>$aluno->id_aluno,'total'=>$total_compra])}}" class="btn btn-primary" style="background-color: #80bfff">Comprar</a>
+
+
+									<div class="footer">
+										<div class="row">
+									  		<div class="col-md-4"> 
+									  			
+									  		</div>
+									  		<div class="col-md-4">
+									  			
+									  		</div>
+									  		<div class="col-md-4">
+									  			<a href="{{route('bar.idAluno')}}" class="btn btn-primary" style="background-color: #80bfff">Sair</a>
+									  		</div>
+									  	</div>
+									  	<br>
+									</div>
+
 								</div>
 								
 							<div class="col-md-6">
@@ -186,16 +203,21 @@
 				      			@else
 				      				<h6>Saldo: {{$aluno->saldo}}€</h6>
 				      			@endif
+
+
 							</div>
+							
 						</div>
 					</div>
 					</div>
 				</div>
-					</div>
+				</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
+
 
 @endsection
 @section ('script')

@@ -1,0 +1,12 @@
+ERROS	
+
+
+	Bug de criar um movimento na papelaria elimar tudo e depois no bar ir para a papelaria
+
+	Produtos no bar
+
+
+
+MELHORIAS
+
+	

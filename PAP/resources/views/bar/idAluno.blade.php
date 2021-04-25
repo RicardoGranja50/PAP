@@ -1,58 +1,51 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8"/>
-  <title>
-  	@section('titulo')
-		Cartão
-	@endsection
-    @yield('titulo')
-  </title>
-   <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
-    <script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/all.min.js')}}"></script>
-</head>
-<body style="background-color: #80bfff;">
- 	<div class="container">
-		<div class="box">
-			<nav class="bg-white">
-				<h5 align="center">Cartão Aluno</h5><br>
-				<form action="{{route('bar.bar.exec')}}" method="post">
-					@csrf
-					<label for="idAluno"></label>
-	  				<input type="text" name="idAluno" autofocus>
-	  				<button type="submit" class="btn btn-primary" style="background-color: #80bfff">Confirmar</button>
-	  				
-	  				@if(session()->has('msg'))
-				        <div class="alert alert-danger" role="alert">
-				          {{session('msg')}}
-				        </div>
-				    @endif
-	  			</form>
-			</nav>
+@extends('layout')
+@section('titulo')
+	Cartão
+@endsection
+@section('pesquisaAluno')
+@endsection
+@section('conteudo')
+	<body>
+		<div class="container">
+			<div class="box">
+				<nav style="background-color:#f2f2f2">
+					<h5 align="center">Cartão Aluno</h5><br>
+					<form action="{{route('bar.bar.exec')}}" method="post">
+						@csrf
+						<label for="idAluno"></label>
+			  			<input type="text" name="idAluno" autofocus>
+			  			<button type="submit" class="btn btn-primary" style="background-color: #80bfff">Confirmar</button>
+			  				
+			  			@if(session()->has('msg'))
+						    <div class="alert alert-danger" role="alert">
+						       	{{session('msg')}}
+						    </div>
+						@endif
+			  		</form>
+				</nav>
+			</div>
 		</div>
 	</div>
 
 	<style>
 		.container {
-		width: 100vw;
-		height: 100vh;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center
+			width: 80vw;
+			height: 80vh;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center
 		}
 		.box {
-		width: 300px;
-		height: 300px;
+			width: 300px;
+			height: 300px;
+			}
 
-	}
-	body {
-		margin: 0px;
-	}
-</style>
-</body>
-</html>
+		body {
+			margin: 0px;
+			background-image: url('{{asset('imagens/fundos/bar.png')}}');
+		}
+
+		</style>
+	</body>
+@endsection

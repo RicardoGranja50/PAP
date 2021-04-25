@@ -37,34 +37,46 @@
               @csrf
             </form>
           </div>  
-
-        @if(!Gate::allows('papelaria'))
-           @if(!Gate::allows('bar'))
-              @if(!Gate::allows('portaria'))
-          
           <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-              <a class="navbar-brand">AEDAH</a>
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                  <a class="nav-link" href="{{route('alunos.index')}}">Alunos <span class="sr-only">(current)</span></a>
-                </li>
-                <form class="form-inline my-2 my-lg-0" action="{{route('alunos.pesquisa')}}" method="post">
-                  @csrf
-                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="pesquisa">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                  </form>
-                </ul>
-                @if(Gate::allows('admin'))
-                  <br><a href="{{route('bar.bar.exec')}}">Bar</a><br>
-                  <a>Papelaria</a>
-                  <br><a href="{{route('transacao.show')}}">Transações</a><br>
+              @if(!Gate::allows('papelaria'))
+                @if(!Gate::allows('bar'))
+                  @if(!Gate::allows('portaria'))
+                    <a class="navbar-brand">AEDAH</a>
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="{{route('alunos.index')}}">Alunos <span class="sr-only">(current)</span></a>
+                      </li>
+                      <form class="form-inline my-2 my-lg-0" action="{{route('alunos.pesquisa')}}" method="post">
+                        @csrf
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="pesquisa">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                      </form>
+                    </ul>
+                  @endif
                 @endif
+              @endif
+
+              @if(Gate::allows('admin'))
+                  <br><a href="{{route('bar.idAluno')}}">Bar</a><br>
+                  <a href="{{route('papelaria.carregamentos.idAluno')}}">Papelaria</a>
+                  <br><a href="{{route('portaria.index')}}">Portaria</a>
+                  <br><a href="{{route('transacao.show')}}">Transações</a><br>
+                  <a href="{{route('papelaria.papelaria.produtos.index')}}">Produtos Papelaria</a>
+                  <br><a href="{{route('bar.produtos')}}">Produtos Bar</a>
+              @elseif(Gate::allows('papelaria')) 
+                <br>
+                <a href="{{route('papelaria.papelaria.produtos.index')}}">Produtos Papelaria</a>
+               @elseif(Gate::allows('bar')) 
+                <br>
+                <a href="{{route('bar.produtos')}}">Produtos Bar</a>
+              @endif
             </div>
           </div>
-            @endif
-          @endif
-      @endif 
+            
+         
+         
+          
 @yield('a')
 </nav> 
       @if(session()->has('eliminada'))

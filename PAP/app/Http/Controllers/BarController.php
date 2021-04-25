@@ -18,7 +18,7 @@ class BarController extends Controller
     public function idAluno(){
 
     	if(auth()->check()){
-            if(Gate::allows('bar')){
+            if(Gate::allows('bar') || Gate::allows('admin')){
     	       return view('bar.idAluno');
             }
             else{
@@ -34,7 +34,7 @@ class BarController extends Controller
     public function exec(Request $req){
 
          if(auth()->check()){
-            if(Gate::allows('bar')){
+            if(Gate::allows('bar') || Gate::allows('admin')){
                 $cartao=$req->idAluno;
                 $aluno=Aluno::where('cartao_aluno',$cartao)->first();
                 $cat='tudo';
@@ -76,7 +76,7 @@ class BarController extends Controller
     public function bar(Request $req){
 
         if(auth()->check()){
-            if(Gate::allows('bar')){
+            if(Gate::allows('bar') || Gate::allows('admin')){
 
                 $aluno=Aluno::where('id_aluno',$req->id)->first();
                 $tipo='bar';
@@ -107,7 +107,7 @@ class BarController extends Controller
     public function produtos(){
 
         if(auth()->check()){
-            if(Gate::allows('bar')){
+            if(Gate::allows('bar') || Gate::allows('admin')){
                 $tipo='bar';
                 $produtos=Produto::where('tipo_produto', $tipo)->paginate(12);
                 return view('bar.produtos',[
@@ -126,7 +126,7 @@ class BarController extends Controller
     public function create(){
 
         if(auth()->check()){
-            if(Gate::allows('bar')){
+            if(Gate::allows('bar') || Gate::allows('admin')){
                 return view('bar.produtos_create');
             }
             else{
@@ -141,7 +141,7 @@ class BarController extends Controller
     public function store(Request $req){
 
         if(auth()->check()){
-            if(Gate::allows('bar')){
+            if(Gate::allows('bar') || Gate::allows('admin')){
                 $novoProduto=$req->validate([
                     'nome'=>['required','min:3','max:150'],
                     'preco'=>['required','numeric'],
@@ -177,7 +177,7 @@ class BarController extends Controller
     public function edit(Request $req){
 
         if(auth()->check()){
-            if(Gate::allows('bar')){
+            if(Gate::allows('bar') || Gate::allows('admin')){
 
                 $idProduto=$req->idp;
                 $produto=Produto::where('id_produto',$idProduto)->first();
@@ -198,7 +198,7 @@ class BarController extends Controller
     public function update(Request $req){
 
         if(auth()->check()){
-            if(Gate::allows('bar')){
+            if(Gate::allows('bar') || Gate::allows('admin')){
                 $idProduto=$req->idp;
                 $produto=Produto::where('id_produto',$idProduto)->first();
                 $imagemAntiga=$produto->foto;
@@ -243,7 +243,7 @@ class BarController extends Controller
     public function destroy(Request $r){
 
         if(auth()->check()){
-            if(Gate::allows('bar')){
+            if(Gate::allows('bar') || Gate::allows('admin')){
                 $produto=Produto::where('id_produto',$r->idp)->first();
                 $fotoAntiga=$produto->foto;
 

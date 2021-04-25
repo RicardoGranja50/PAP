@@ -64,9 +64,9 @@
 						</div>
 
 
-						<div class="col-md-12">
-							<h6><a href="{{route('papelaria.papelaria.produtos.index')}}">Produtos</h6></a>
-						</div>
+						<!-- <div class="col-md-12">
+							<h6><a href="{{route('papelaria.papelaria.produtos.index')}}">Produtos</a></h6>
+						</div> -->
 					</div>
 				</div>
 				<div class="col-md-4">
