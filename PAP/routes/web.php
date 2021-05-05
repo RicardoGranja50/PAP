@@ -128,7 +128,7 @@ use Illuminate\Support\Facades\Route;
 
 	//Bar
 
-		Route::get('/aedah/bar/{id}/{cat}','App\Http\Controllers\PapelariaController@papelaria')->name('bar.bar')->middleware('auth');
+		Route::get('/aedah/bar/{id}/{cat}/index','App\Http\Controllers\PapelariaController@papelaria')->name('bar.bar')->middleware('auth');
 
 		Route::post('/aedah/bar/idAluno/exec','App\Http\Controllers\BarController@exec')->name('bar.bar.exec')->middleware('auth');
 

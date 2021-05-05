@@ -47,7 +47,7 @@ class BarController extends Controller
                         if($entrada_saida->entrada_saida==0){
 
                             return redirect()->route('bar.bar',[
-                                'id'=>$aluno->id_aluno,
+                                'aluno'=>$aluno,
                                 'cat'=>$cat
                             ]);
                         }
@@ -105,7 +105,6 @@ class BarController extends Controller
 
 
     public function produtos(){
-
         if(auth()->check()){
             if(Gate::allows('bar') || Gate::allows('admin')){
                 $tipo='bar';
