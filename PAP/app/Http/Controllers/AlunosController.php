@@ -336,19 +336,23 @@ class AlunosController extends Controller
     public function transacaoAluno(Request $req){
 
         $aluno=Aluno::where('id_aluno', $req->id)->first();
-        $mov=Movimento::where('id_aluno', $req->id)->orderBy('created_at', 'desc')->paginate(25);
+        $mov=Movimento::where('id_aluno', $req->id)->where('tipo_movimento', '!=', 'portaria')->orderBy('created_at', 'desc')->paginate(25);
         return view('alunos.transacao_aluno_show',[
             'mov'=>$mov,
             'aluno'=>$aluno
         ]);
     }
 
-    function extrato_pdf() {
+    function extrato_pdf(Request $req) {
+
+        $aluno=Aluno::where('id_aluno', $req->id)->first();
+        $mov=Movimento::where('id_aluno', $req->id)->where('tipo_movimento', '!=', 'portaria')->orderBy('created_at', 'desc')->paginate(25);
 
         $data = [
-            'foo' => 'bar'
-
+            'aluno' => $aluno,
+            'mov'=> $mov,
         ];
+
         $pdf = PDF::loadView('alunos.extrato_aluno', $data);
         return $pdf->stream('document.pdf');
     }

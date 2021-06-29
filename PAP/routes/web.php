@@ -178,7 +178,7 @@ use Illuminate\Support\Facades\Route;
 
 	//ExtartoPDF
 
-		Route::get('/aedah/transacoes/pdf', 'App\Http\Controllers\AlunosController@extrato_pdf')->name('extrato.aluno')->middleware('auth');
+		Route::get('/aedah/transacoes/pdf/{id}', 'App\Http\Controllers\AlunosController@extrato_pdf')->name('extrato.aluno')->middleware('auth');
 
 
 

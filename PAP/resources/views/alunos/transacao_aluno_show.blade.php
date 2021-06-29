@@ -26,9 +26,7 @@
 	<div class="container-fluid">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-12 text-white bg-secondary">
-					&nbsp
-				</div>
+				
 				@foreach($mov as $m)
 					<div class="col-md-4 text-white bg-secondary">
 						{{$m->tipo_movimento}}
@@ -55,6 +53,6 @@
 	<br>
 	<div class="container-fluid">
 		<a href="{{route('alunos.showAlunos', ['id'=>$aluno->id_aluno,'idt'=>$aluno->id_turma])}}" class="btn btn-primary" style="background-color: #80bfff">Cancelar</a>
-		<a href="{{route('extrato.aluno')}}" class="btn btn-primary" style="background-color: #80bfff">Extrato do Aluno</a>
+		<a href="{{route('extrato.aluno', ['id'=>$aluno->id_aluno])}}" class="btn btn-primary" style="background-color: #80bfff">Extrato do Aluno</a>
 	</div>
 @endsection
