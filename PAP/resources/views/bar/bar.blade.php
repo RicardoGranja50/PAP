@@ -203,7 +203,7 @@
 				      			@else
 				      				<h6>Saldo: {{$aluno->saldo}}€</h6>
 				      			@endif
-
+				      			
 
 							</div>
 							

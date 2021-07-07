@@ -47,7 +47,7 @@ class BarController extends Controller
                         if($entrada_saida->entrada_saida==0){
 
                             return redirect()->route('bar.bar',[
-                                'aluno'=>$aluno,
+                                'id'=>$aluno,
                                 'cat'=>$cat
                             ]);
                         }
@@ -56,7 +56,7 @@ class BarController extends Controller
                         }
                     }
                     else{
-                            return redirect()->route('bar.idAluno')->with('msg','O aluno não passou a pulseira na portaria!');
+                        return redirect()->route('bar.idAluno')->with('msg','O aluno não passou a pulseira na portaria!');
                     }
                 }
                 else{

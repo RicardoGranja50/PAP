@@ -56,7 +56,7 @@
 					@endif
 
 					<div class="col-md-2 text-white bg-secondary">
-						{{$m->created_at->format('d/m/Y H:m:s')}}
+						{{$m->created_at->format('d/m/Y H:i:s')}}
 					</div>
 				@endforeach
 				

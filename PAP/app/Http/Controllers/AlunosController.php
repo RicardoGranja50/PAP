@@ -57,9 +57,9 @@ class AlunosController extends Controller
         if(auth()->check()){
     		$idAluno=$req->id;
     		$aluno=Aluno::where('id_aluno',$idAluno)->with('turma')->first();
+
     		return view('alunos.showAlunos',[
     			'aluno'=>$aluno,
-                
     		]);
         }
 	}
@@ -70,7 +70,7 @@ class AlunosController extends Controller
     		$nomeAluno=$req->pesquisa;
     		$alunos=Aluno::where('nome','Like','%'.$nomeAluno.'%')->with('turma')->get();
     	
-    		 return view('alunos.pesquisa',[
+    		return view('alunos.pesquisa',[
     		 	'alunos'=>$alunos,
     		 	'nomeAluno'=>$nomeAluno,
     		 ]);
@@ -148,7 +148,6 @@ class AlunosController extends Controller
                 $cartao=Aluno::max('cartao_aluno');
                 
 
-
                 if($req->hasFile('foto_aluno')){
                     $nomeFoto=$req->file('foto_aluno')->getClientOriginalName();
                     $nomeFoto=time().'_'.$nomeFoto;
@@ -156,9 +155,6 @@ class AlunosController extends Controller
                 
                     $novoAluno['foto_aluno']=$nomeFoto;
                 }
-
-
-              
 
                 $aluno=Aluno::create($novoAluno);
 
