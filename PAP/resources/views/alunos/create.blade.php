@@ -44,8 +44,13 @@
 	    			@endif
 				</div>
 				<div class="form-group col-md-3">
-				   <label><b>Turma</b></label>
-				   	<select name="id_turma" class="custom-select" value="{{old('id_turma')}}" disabled="true">
+					<label><b>Turma</b></label><br>
+				   @foreach($turmas as $turma)
+					   @if($turma->id_turma==$idt)
+					   		<button class="btn btn-secondary" disabled="disabled">{{$turma->ano}}{{$turma->curso_abreviacao}}</button>
+					   @endif
+				   @endforeach
+				   	<select name="id_turma" class="custom-select" value="{{old('id_turma')}}" style="display: none;">
 				        @foreach($turmas as $turma)
 				            <option value="{{$turma->id_turma}}" @if($turma->id_turma==$idt)selected @endif>{{$turma->ano}}{{$turma->curso_abreviacao}}</option>
 				        @endforeach
