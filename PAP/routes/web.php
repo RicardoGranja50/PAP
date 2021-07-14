@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 //PaginaPrincipal
 
 		//Route::get('/aedah/principal','App\Http\Controllers\PrincipalController@principal')->name('principal.principal');
